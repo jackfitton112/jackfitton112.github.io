@@ -28,7 +28,7 @@
     }
     var time = new Date();
     httpRequest.onreadystatechange = alertContents;
-    httpRequest.open('GET', 'https://message.cadetconcrete.co.uk/inc/maths/receive.php?time=' + time +'&userid='+userID, true);
+    httpRequest.open('GET', 'https://message.cadetconcrete.co.uk/inc/maths/receive.php?time=' + time, true);
     httpRequest.send();
   }
 

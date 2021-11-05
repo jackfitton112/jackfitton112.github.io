@@ -16,7 +16,7 @@ while ($row = $result->fetch_assoc()){
 
 $data .= "}";
 json_encode ($data);
-header ("emoji:".$data);
+echo $data;
 
 
 
