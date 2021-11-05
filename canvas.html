@@ -48,10 +48,13 @@
   var t=setInterval(makeRequest,1000);
 })();
 
+
+</script>
+
+<script>
 var x = document.getElementById('log').textContent;
 var c = document.getElementById("myCanvas");
-var ctx = c.getContext(x);
+var ctx = c.getContext('2d');
 ctx.font = "30px Arial";
-ctx.fillText("Hello World", 10, 50);
-
+ctx.fillText(x, 10, 50);
 </script>
