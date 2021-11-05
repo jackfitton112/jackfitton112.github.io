@@ -38,12 +38,19 @@
         ctx.font = "30px Arial";
 
         var x = JSON.parse(httpRequest.response);
-
+		for (const [key, value] of Object.entries(x)) {
+			for (let step = 0; step < value; step++) {
+  				// Runs 5 times, with values of step 0 through 4.
+  				ctx.fillText(dict[key], getRndInteger(0, 1920), getRndInteger(0,1080))
+			}
+  			console.log(key, value);
+		}
+		/*
         for (var i of x){
 
 
           ctx.fillText(dict[i], getRndInteger(0, 1920), getRndInteger(0, 1080));
-        }
+        }*/
       } else {
         console.log(httpRequest.status);
       }
