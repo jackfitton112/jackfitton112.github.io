@@ -33,8 +33,16 @@
     if (httpRequest.readyState === XMLHttpRequest.DONE) {
       if (httpRequest.status === 200) {
 
-        const element = document.getElementById("log");
-        element.innerHTML = httpRequest.responseText;
+        var c = document.getElementById("myCanvas");
+        var ctx = c.getContext('2d');
+        ctx.font = "30px Arial";
+
+        var x = JSON.parse(httpRequest.response);
+
+        for (var i of x){
+        
+          ctx.fillText("&#" + i, 10, 50);
+        }
       } else {
         console.log(httpRequest.status);
       }
@@ -56,14 +64,5 @@
 
 
 
-var c = document.getElementById("myCanvas");
-var ctx = c.getContext('2d');
-ctx.font = "30px Arial";
-console.log(document.getElementById('log').textContent);
-//var x = JSON.parse(document.getElementById('log').textContent);
 
-for (var i of x){
-
-  ctx.fillText("&#" + i, 10, 50);
-}
 </script>
