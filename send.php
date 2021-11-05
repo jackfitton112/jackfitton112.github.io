@@ -7,7 +7,7 @@ header("Access-Control-Allow-Headers: *");
 $response = $_GET['id'];
 
 if ($response == "delete"){
-  $conn->query("UPDATE `emoji` SET `emoji` = '0' WHERE `emoji`.`id` = 4 AND `id` = 3 AND `id` = 2 AND `id` = 1");
+  $conn->query("UPDATE `emoji` SET `emoji` = '0' WHERE `emoji`.`id` = 4 OR `id` = 3 OR `id` = 2 OR `id` = 1");
   exit;
 }
 

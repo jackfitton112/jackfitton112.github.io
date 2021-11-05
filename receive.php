@@ -9,9 +9,9 @@ $data = array();
 $result = $conn->query("SELECT * FROM `emoji` WHERE 1");
 
 while ($row = $result->fetch_assoc()){
-$data2 = array($row['id'] => $row['emoji']);
+$data2 = $row['emoji'];
+array_push($data, $data2);
 
-array_push($data,$data2);
 
 }
 
