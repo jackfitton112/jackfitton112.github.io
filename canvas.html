@@ -5,12 +5,12 @@
 
 </head>
 
-<body>
+<body onload="resizeCanvas()">
 
 <div>
-<canvas id="myCanvas" width="700" height="700" style="border:1px solid #000000;"></canvas>
+<canvas id="myCanvas" width="700" height="700" style="border:1px solid #000000; float:left;"></canvas>
 </div>
-<div>
+<div class="chart-container" style="position: relative; height:40vh; width:40vw; float:left;">
   <canvas id="myChart"  width="700" height="700"></canvas>
 </div>
 
@@ -24,12 +24,23 @@
 
 
 <script type="text/javascript">
+function resizeCanvas() {
+    var canv = document.getElementById("myCanvas");
+    canv.width = window.innerWidth*0.4;
+    canv.height = window.innerHeight*0.8;
+	var charT = document.getElementById("myChart");
+    charT.width = window.innerWidth*0.5;
+    charT.height = window.innerHeight*0.5;
+}
 function del(){
   fetch("https://message.cadetconcrete.co.uk/inc/maths/send.php?id=delete")
   var c = document.getElementById("myCanvas");
   var ctx = c.getContext('2d');
-  ctx.clearRect(0, 0, 700, 700);
+  var canv = document.getElementById("myCanvas");
+  ctx.clearRect(0, 0, canv.width, canv.height);
   prev=[0, 0, 0, 0]
+  data.datasets[0].data=prev
+  myChart.update()
 }
 (function() {//this updates the chat window
   var httpRequest;
@@ -55,6 +66,7 @@ function del(){
         var ctx = c.getContext('2d');
         ctx.font = "30px Arial";
         var x = JSON.parse(httpRequest.response);
+		var canv = document.getElementById("myCanvas");
 		//console.log(x)
 		x.forEach(function draw (value, index) {
 			var times = value-prev[index]
@@ -63,7 +75,7 @@ function del(){
 			if (times > 0) {
 				for (let step = 0; step < times; step++) {
   					//console.log("added type "+index)
-  					ctx.fillText(dict[index], getRndInteger(0, 700), getRndInteger(0,700))
+  					ctx.fillText(dict[index], getRndInteger(0, canv.width), getRndInteger(0, canv.height))
 				}
 				prev[index]=value
 
