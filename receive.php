@@ -5,28 +5,18 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: *");
 header("Access-Control-Expose-Headers: *");
 
-
-$result = $conn->query("SELECT * FROM `emoji`");
-$num = $result->num_rows - 1;
-$i = 0;
-$data = "[";
+$data = array();
+$result = $conn->query("SELECT * FROM `emoji` WHERE 1");
 
 while ($row = $result->fetch_assoc()){
-  $r = $row['emoji'];
-  $data .= "\"{$r}\"";
-  $i = $i +1;
+$data2 = array($row['id'] => $row['emoji']);
 
-  if ($i == $num){
-    $data .= "";
-    break;
-  }
-    $data .= ",";
+array_push($data,$data2);
+
 }
 
-$data .= "]";
-echo $data;
 
-
+echo json_encode($data);
 
 
  ?>

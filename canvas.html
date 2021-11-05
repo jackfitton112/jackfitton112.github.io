@@ -9,6 +9,13 @@
 
 <center><canvas id="myCanvas" width="700" height="700" style="border:1px solid #000000;"></canvas></center>
 <p id="log" style=""></p>
+<button class="btn btn-primary" onclick="del()" type="button" style="width: 100%;">Reset Canvas</button>
+
+<script>
+function del(){
+  fetch("https://message.cadetconcrete.co.uk/inc/maths/send.php?id=delete")
+}
+</script>
 
 <script type="text/javascript">
 

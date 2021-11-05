@@ -13,19 +13,36 @@ if ($response == "delete"){
 
 
 if ($response == "h"){
-  $data = "1";
+  $res = $conn->query("SELECT * FROM `emoji` WHERE `id` = 1");
+  $row = $res->fetch_assoc();
+  $count = $row['emoji'] + 1;
+  $conn->query("UPDATE `emoji` SET `emoji` = '{$count}' WHERE `emoji`.`id` = 1");
+
 }
 if ($response == "s"){
-  $data = "2";
+  $res = $conn->query("SELECT * FROM `emoji` WHERE `id` = 2");
+  $row = $res->fetch_assoc();
+  $count = $row['emoji'] + 1;
+  $conn->query("UPDATE `emoji` SET `emoji` = '{$count}' WHERE `emoji`.`id` = 2;");
+
 }
 if ($response == "d"){
-  $data = "3";
+  $res = $conn->query("SELECT * FROM `emoji` WHERE `id` = 3");
+  $row = $res->fetch_assoc();
+  $count = $row['emoji'] + 1;
+  $conn->query("UPDATE `emoji` SET `emoji` = '{$count}' WHERE `emoji`.`id` = 3");
+
+
 }
 if ($response == "c"){
-  $data = "4";
+  $res = $conn->query("SELECT * FROM `emoji` WHERE `id` = 4");
+  $row = $res->fetch_assoc();
+  $count = $row['emoji'] + 1;
+  $conn->query("UPDATE `emoji` SET `emoji` = '{$count}' WHERE `emoji`.`id` = 4");
+
+
 }
 
-$conn->query("INSERT INTO `emoji` (`id`, `emoji`) VALUES (NULL, '{$data}')");
 
 
 
