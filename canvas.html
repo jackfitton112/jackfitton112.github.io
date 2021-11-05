@@ -39,11 +39,14 @@
 
         var x = JSON.parse(httpRequest.response);
 		for (const [key, value] of Object.entries(x)) {
-			for (let step = 0; step < value; step++) {
-  				// Runs 5 times, with values of step 0 through 4.
-  				ctx.fillText(dict[key], getRndInteger(0, 1920), getRndInteger(0,1080))
-			}
+			var times = value-prev[key]
+			if (times > 0) {
+				for (let step = 0; step < times; step++) {
+  					// Runs 5 times, with values of step 0 through 4.
+  					ctx.fillText(dict[key], getRndInteger(0, 1920), getRndInteger(0,1080))
+				}
   			console.log(key, value);
+			}
 		}
 		/*
         for (var i of x){
@@ -64,6 +67,12 @@ var dict = {
   "2":"\u{1F622}",
   "3":"\u{1F633}",
   "4":"\u{1F610}"
+}
+var prev = {
+	"1":0,
+	"2":0,
+	"3":0,
+	"4":0
 }
 function getRndInteger(min, max) {
   return Math.floor(Math.random() * (max - min) ) + min;
