@@ -47,6 +47,8 @@ function del(){
         var x = JSON.parse(httpRequest.response);
 		for (const [key, value] of Object.entries(x)) {
 			var times = value-prev[key]
+			console.log("value: "+value+" prev[key]: "+prev[key])
+			console.log("times: "+times)
 			if (times > 0) {
 				for (let step = 0; step < times; step++) {
   					// Runs 5 times, with values of step 0 through 4.
