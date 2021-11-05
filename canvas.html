@@ -26,7 +26,6 @@
         return false;
       }
       var time = new Date();
-  	var userID=document.getElementById("userid").textContent
       httpRequest.onreadystatechange = alertContents;
       httpRequest.open('GET', 'https://message.cadetconcrete.co.uk/inc/maths/receive.php?time=' + time, true);
       httpRequest.send();
