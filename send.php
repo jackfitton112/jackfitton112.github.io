@@ -6,6 +6,12 @@ header("Access-Control-Allow-Headers: *");
 
 $response = $_GET['id'];
 
+if ($response == "delete"){
+  $conn->query("DELETE FROM `emoji` WHERE 1");
+  exit;
+}
+
+
 if ($response == "h"){
   $data = "1F60A";
 }
