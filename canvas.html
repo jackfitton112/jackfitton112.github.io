@@ -15,9 +15,42 @@
 
 <script type="text/javascript">
 
-   var time = new Date();
-   let response = fetch('https://message.cadetconcrete.co.uk/inc/maths/receive.php?time=' + time);
-   console.log(response.headers);
+   //var time = new Date();
+  //let response = fetch('https://message.cadetconcrete.co.uk/inc/maths/receive.php?time=' + time);
+   //console.log(response.headers);
 
+
+   (function() {//this updates the chat window
+     var httpRequest;
+
+
+     function makeRequest() {
+       httpRequest = new XMLHttpRequest();
+
+       if (!httpRequest) {
+         alert('Giving up :( Cannot create an XMLHTTP instance');
+         return false;
+       }
+       var time = new Date();
+       httpRequest.onreadystatechange = alertContents;
+       httpRequest.open('GET', 'https://message.cadetconcrete.co.uk/inc/maths/receive.php?time=' + time, true);
+       httpRequest.send();
+     }
+
+     function alertContents() {
+       if (httpRequest.readyState === XMLHttpRequest.DONE) {
+         if (httpRequest.status === 200) {
+           //const element = document.getElementById("text");
+           //element.innerHTML = httpRequest.responseText;
+           var x = XMLHttpRequest.getResponseHeader("emoji");
+           console.log (x);
+         } else {
+           console.log(httpRequest.status);
+         }
+       }
+     }
+
+     var t=setInterval(makeRequest,1000);
+   })();
 
 </script>
