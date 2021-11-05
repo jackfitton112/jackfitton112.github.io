@@ -36,9 +36,9 @@
     if (httpRequest.readyState === XMLHttpRequest.DONE) {
       if (httpRequest.status === 200) {
         //const element = document.getElementById("text");
-        var x = httpRequest.responseText;
-        document.getElementById('log').innerHTML = x;
-		//rendermsgs(JSON.parse(httpRequest.responseText));
+
+        const element = document.getElementById("log");
+        element.innerHTML = httpRequest.responseText;
       } else {
         console.log(httpRequest.status);
       }
