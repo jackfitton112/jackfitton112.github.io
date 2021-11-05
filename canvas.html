@@ -39,30 +39,23 @@ function del(){
   function alertContents() {
     if (httpRequest.readyState === XMLHttpRequest.DONE) {
       if (httpRequest.status === 200) {
-        //console.log(httpRequest.response);
         var c = document.getElementById("myCanvas");
         var ctx = c.getContext('2d');
         ctx.font = "30px Arial";
         var x = JSON.parse(httpRequest.response);
 		console.log(x)
-		for (var key of x.keys()) {
-			var times = x[key]-prev[key]
-			console.log("x[key]: "+x[key]+" prev[key]: "+prev[key])
+		x.forEach(function draw (value, index) {
+			var times = value-prev[index]
+			console.log("current: "+value+"; previous: "+prev[index])
 			console.log("times: "+times)
 			if (times > 0) {
 				for (let step = 0; step < times; step++) {
-  					// Runs 5 times, with values of step 0 through 4.
-  					ctx.fillText(dict[key], getRndInteger(0, 1920), getRndInteger(0,1080))
+  					console.log("added type "+index)
+  					ctx.fillText(dict[index], getRndInteger(0, 1920), getRndInteger(0,1080))
 				}
-  			console.log(key, value);
+				prev[index]=value
 			}
-		}
-		/*
-        for (var i of x){
-
-
-          ctx.fillText(dict[i], getRndInteger(0, 1920), getRndInteger(0, 1080));
-        }*/
+		})
       } else {
         console.log(httpRequest.status);
       }
