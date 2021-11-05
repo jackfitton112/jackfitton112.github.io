@@ -7,11 +7,20 @@ header("Access-Control-Expose-Headers: *");
 
 
 $result = $conn->query("SELECT * FROM `emoji`");
+$num = $result->num_rows - 1;
+$i = 0;
 $data = "[";
 
 while ($row = $result->fetch_assoc()){
   $r = hexdec($row['emoji']);
-  $data .= "\"{$r}\",";
+  $data .= "\"{$r}\"";
+  $i = $i +1;
+
+  if ($i == $num){
+    $data .= "";
+    break;
+  }
+    $data .= ",";
 }
 
 $data .= "]";
