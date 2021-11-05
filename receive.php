@@ -11,11 +11,10 @@ $data = "[";
 
 while ($row = $result->fetch_assoc()){
   $r = hexdec($row['emoji']);
-  $data .= "\"&#{$r}\",";
+  $data .= "\"{$r}\",";
 }
 
 $data .= "]";
-$data = "&#x1F981";
 echo $data;
 
 
