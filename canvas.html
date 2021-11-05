@@ -39,14 +39,16 @@ function del(){
   function alertContents() {
     if (httpRequest.readyState === XMLHttpRequest.DONE) {
       if (httpRequest.status === 200) {
-        console.log(httpRequest.response);
+        //console.log(httpRequest.response);
         var c = document.getElementById("myCanvas");
         var ctx = c.getContext('2d');
         ctx.font = "30px Arial";
-
         var x = JSON.parse(httpRequest.response);
-		for (const [key, value] of Object.entries(x)) {
-			var times = value-prev[key]
+		console.log(x)
+		for (var key of x.keys()) {
+			var times = x[key]-prev[key]
+			console.log("x[key]: "+x[key]+" prev[key]: "+prev[key])
+			console.log("times: "+times)
 			if (times > 0) {
 				for (let step = 0; step < times; step++) {
   					// Runs 5 times, with values of step 0 through 4.
