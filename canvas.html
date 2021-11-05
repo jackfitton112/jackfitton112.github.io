@@ -7,11 +7,22 @@
 
 <body>
 
-<center><canvas id="myCanvas" width="700" height="700" style="border:1px solid #000000;"></canvas></center>
+<div>
+<canvas id="myCanvas" width="700" height="700" style="border:1px solid #000000;"></canvas>
+</div>
+<div>
+  <canvas id="myChart"  width="700" height="700"></canvas>
+</div>
+
+
 <p id="log" style=""></p>
 <button class="btn btn-primary" onclick="del()" type="button" style="width: 100%;">Reset Canvas</button>
 
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<!--<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>-->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
 <script type="text/javascript">
 function del(){
   fetch("https://message.cadetconcrete.co.uk/inc/maths/send.php?id=delete")
@@ -55,8 +66,11 @@ function del(){
   					ctx.fillText(dict[index], getRndInteger(0, 700), getRndInteger(0,700))
 				}
 				prev[index]=value
+
 			}
 		})
+		data.datasets[0].data=prev
+		myChart.update()
       } else {
         console.log(httpRequest.status);
       }
@@ -65,38 +79,50 @@ function del(){
 
   var t=setInterval(makeRequest,100);
 })();
+
+function getRndInteger(min, max) {
+  return Math.floor(Math.random() * (max - min) ) + min;
+}
 var dict = {
   "0":"h",//\u{1F60A}", //happy
   "1":"s",//\u{1F622}", //sad
   "2":"d",//\u{1F633}", //depressed
   "3":"c"//\u{1F610}" //confused
 }
+
+
 var prev=[0, 0, 0, 0]
-function getRndInteger(min, max) {
-  return Math.floor(Math.random() * (max - min) ) + min;
-}
-/*  google.charts.load('current', {'packages':['corechart']});
-  google.charts.setOnLoadCallback(drawChart);
 
-  function drawChart() {
+const data = {
+  labels: [
+    'Happy',
+    'Sad',
+    'D██████████',
+	'Confused'
+  ],
+  datasets: [{
+    label: 'Emotions',
+    data: [300, 50, 100],
+    backgroundColor: [
+      'rgb(0, 255, 0)',
+      'rgb(0, 0, 255)',
+      'rgb(100, 100, 100)',
+	  'rgb(255, 0, 0)'
+    ],
+    hoverOffset: 4
+  }]
+};
 
-    var data = google.visualization.arrayToDataTable([
-      ['Task', 'Hours per Day'],
-      ['Happy',     prev[0]],
-      ['Sad',      prev[1]],
-      ['Confused',  prev[2]],
-      ['Depressed', prev[3]]
+const config = {
+  type: 'doughnut',
+  data: data,
+};
 
-    ]);
+const myChart = new Chart( //render chart
+	document.getElementById('myChart'),
+	config
+	);
 
-    var options = {
-      title: 'Feelings'
-    };
-
-    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-    chart.draw(data, options);
-  }*/
 </script>
 
 <script type="text/javascript">
