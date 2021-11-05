@@ -6,14 +6,15 @@ header("Access-Control-Allow-Headers: *");
 
 
 $result = $conn->query("SELECT * FROM `emoji`");
-$data = "[";
+$data = "{";
 
 while ($row = $result->fetch_assoc()){
   $r = hexdec($row['emoji']);
-  $data .= "\"&#{$r}\",";
+  $data .= "[\"&#{$r}\"],";
 }
 
-$data .= "]";
+$data .= "}";
+json_encode ($data);
 header ("emoji:".$data);
 
 
