@@ -32,7 +32,6 @@
   function alertContents() {
     if (httpRequest.readyState === XMLHttpRequest.DONE) {
       if (httpRequest.status === 200) {
-        //const element = document.getElementById("text");
 
         const element = document.getElementById("log");
         element.innerHTML = httpRequest.responseText;
@@ -47,16 +46,22 @@
 
 
 </script>
-
+1
 </body>
 </html>
 
 
 
 <script>
-var x = document.getElementById('log').textContent;
+
+
+
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext('2d');
 ctx.font = "30px Arial";
-ctx.fillText(x, 10, 50);
+var x = JSon.parse(document.getElementById('log').textContent);
+for (var i of x){
+
+  ctx.fillText("&#"+i, 10, 50);
+}
 </script>
