@@ -26,11 +26,11 @@
 <script type="text/javascript">
 function resizeCanvas() {
     var canv = document.getElementById("myCanvas");
-    canv.width = window.innerWidth*0.4;
-    canv.height = window.innerHeight*0.8;
+    canv.width = window.innerWidth*0.5;
+    canv.height = window.innerHeight*0.9;
 	var charT = document.getElementById("myChart");
-    charT.width = window.innerWidth*0.5;
-    charT.height = window.innerHeight*0.5;
+    charT.width = window.innerWidth*0.7;
+    charT.height = window.innerHeight*0.7;
 }
 function del(){
   fetch("https://message.cadetconcrete.co.uk/inc/maths/send.php?id=delete")
@@ -75,7 +75,10 @@ function del(){
 			if (times > 0) {
 				for (let step = 0; step < times; step++) {
   					//console.log("added type "+index)
-  					ctx.fillText(dict[index], getRndInteger(0, canv.width), getRndInteger(0, canv.height))
+					ctx.fillStyle = dict[index][1]
+  					ctx.fillText(dict[index][0], getRndInteger(0, canv.width), getRndInteger(0, canv.height))
+					ctx.fillStyle = 'rgba(225,225,225,0.1)';
+					ctx.fillRect(0, 0, canv.width, canv.height);
 				}
 				prev[index]=value
 
@@ -96,10 +99,10 @@ function getRndInteger(min, max) {
   return Math.floor(Math.random() * (max - min) ) + min;
 }
 var dict = {
-  "0":"h",//\u{1F60A}", //happy
-  "1":"s",//\u{1F622}", //sad
-  "2":"d",//\u{1F633}", //depressed
-  "3":"c"//\u{1F610}" //confused
+  "0":["h", "rgb(0, 255, 0)"],//\u{1F60A}", //happy
+  "1":["s", "rgb(0, 0, 255)"],//\u{1F622}", //sad
+  "2":["d", "rgb(100, 100, 100)"],//\u{1F633}", //depressed
+  "3":["c", "rgb(255, 0, 0)"]//\u{1F610}" //confused
 }
 
 
@@ -109,17 +112,17 @@ const data = {
   labels: [
     'Happy',
     'Sad',
-    'D██████████',
+    'Depressed',
 	'Confused'
   ],
   datasets: [{
     label: 'Emotions',
-    data: [300, 50, 100],
+    data: [10, 10, 10, 10],
     backgroundColor: [
-      'rgb(0, 255, 0)',
-      'rgb(0, 0, 255)',
-      'rgb(100, 100, 100)',
-	  'rgb(255, 0, 0)'
+      dict["0"][1],
+      dict["1"][1],
+	  dict["2"][1],
+      dict["3"][1]
     ],
     hoverOffset: 4
   }]
@@ -141,7 +144,6 @@ const myChart = new Chart( //render chart
 
 </script>
 
-<div id="piechart" style="width: 900px; height: 500px;"></div>
 </body>
 </html>
 
