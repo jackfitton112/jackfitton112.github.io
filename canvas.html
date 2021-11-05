@@ -45,8 +45,8 @@ function del(){
         ctx.font = "30px Arial";
         var x = JSON.parse(httpRequest.response);
 		console.log(x)
-		for (const [key, value] of Object.entries(x)) {
-			var times = value-prev[key]
+		for (var key of x.keys()) {
+			var times = x[key]-prev[key]
 			console.log("value: "+value+" prev[key]: "+prev[key])
 			console.log("times: "+times)
 			if (times > 0) {
