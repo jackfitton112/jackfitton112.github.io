@@ -15,7 +15,36 @@
 
 <script type="text/javascript">
 
-  var myRequest = new Request('https://message.cadetconcrete.co.uk/inc/maths/receive.php');
-  var myHeaders = myRequest.headers;
-  console.log(myHeaders);
+(function() {//this updates the chat window
+  var httpRequest;
+
+
+  function makeRequest() {
+    httpRequest = new XMLHttpRequest();
+
+    if (!httpRequest) {
+      alert('Giving up :( Cannot create an XMLHTTP instance');
+      return false;
+    }
+    var time = new Date();
+    httpRequest.onreadystatechange = alertContents;
+    httpRequest.open('GET', 'https://message.cadetconcrete.co.uk/inc/maths/receive.php?time=' + time +'&userid='+userID, true);
+    httpRequest.send();
+  }
+
+  function alertContents() {
+    if (httpRequest.readyState === XMLHttpRequest.DONE) {
+      if (httpRequest.status === 200) {
+        //const element = document.getElementById("text");
+        console.log(httpRequest.responseText);
+		//rendermsgs(JSON.parse(httpRequest.responseText));
+      } else {
+        console.log(httpRequest.status);
+      }
+    }
+  }
+
+  var t=setInterval(makeRequest,1000);
+})();
+
 </script>
