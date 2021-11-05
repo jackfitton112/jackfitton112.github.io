@@ -65,17 +65,12 @@ function del(){
   var t=setInterval(makeRequest,1000);
 })();
 var dict = {
-  "1":"\u{1F60A}",
-  "2":"\u{1F622}",
-  "3":"\u{1F633}",
-  "4":"\u{1F610}"
+  "0":"\u{1F60A}",
+  "1":"\u{1F622}",
+  "2":"\u{1F633}",
+  "3":"\u{1F610}"
 }
-var prev = {
-	"1":0,
-	"2":0,
-	"3":0,
-	"4":0
-}
+var prev=[0, 0, 0, 0]
 function getRndInteger(min, max) {
   return Math.floor(Math.random() * (max - min) ) + min;
 }
