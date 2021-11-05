@@ -49,6 +49,12 @@ function del(){
 			var times = value-prev[index]
 			console.log("current: "+value+"; previous: "+prev[index])
 			console.log("times: "+times)
+			if (times > 0) {
+				for (let step = 0; step < times; step++) {
+  					console.log("added type "+index)
+  					ctx.fillText(dict[index], getRndInteger(0, 1920), getRndInteger(0,1080))
+				}
+			}
 		})
 		/*for (var key of x.keys()) {
 			var times = x[key]-prev[key]
