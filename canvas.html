@@ -34,7 +34,12 @@
     function alertContents() {
       if (httpRequest.readyState === XMLHttpRequest.DONE) {
         if (httpRequest.status === 200) {
-            console.log(httpRequest.headers.get("emoji"));
+          // Get the raw header string
+            var headers = httpRequest.getAllResponseHeaders();
+
+            // Convert the header string into an array
+            // of individual headers
+            var arr = headers.trim().split(/[\r\n]+/);
         } else {
           console.log(httpRequest.status);
         }
