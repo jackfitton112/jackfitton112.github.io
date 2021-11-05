@@ -3,6 +3,7 @@
 include "db.php";
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: *");
+header("Access-Control-Expose-Headers: *");
 
 
 $result = $conn->query("SELECT * FROM `emoji`");
