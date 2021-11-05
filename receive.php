@@ -15,7 +15,7 @@ while ($row = $result->fetch_assoc()){
 }
 
 $data .= "]";
-json_encode ($data);
+$data = "&#x1F981";
 echo $data;
 
 
