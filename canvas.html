@@ -16,9 +16,9 @@
 <script type="text/javascript">
     function request(){
       var time = new Date();
-      fetch('https://message.cadetconcrete.co.uk/inc/maths/receive.php?time=' + time).then(function (response) {
-        console.log(response.headers.get("emoji"));
-      })()};
+      let response = await fetch('https://message.cadetconcrete.co.uk/inc/maths/receive.php?time=' + time)
+      console.log(response.headers.get("emoji"));
+    };
 
     var t=setInterval(request,1000);
 
