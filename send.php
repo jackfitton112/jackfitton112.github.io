@@ -13,16 +13,16 @@ if ($response == "delete"){
 
 
 if ($response == "h"){
-  $data = "1F60A";
+  $data = "1";
 }
 if ($response == "s"){
-  $data = "1F622";
+  $data = "2";
 }
 if ($response == "d"){
-  $data = "1F633";
+  $data = "3";
 }
 if ($response == "c"){
-  $data = "1F610";
+  $data = "4";
 }
 
 $conn->query("INSERT INTO `emoji` (`id`, `emoji`) VALUES (NULL, '{$data}')");

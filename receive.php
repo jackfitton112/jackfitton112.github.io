@@ -13,7 +13,7 @@ $data = "[";
 
 while ($row = $result->fetch_assoc()){
   $r = $row['emoji'];
-  $data .= "\"".$r."\"";
+  $data .= "\"{$r}\"";
   $i = $i +1;
 
   if ($i == $num){

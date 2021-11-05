@@ -41,7 +41,7 @@
 
         for (var i of x){
 
-          ctx.fillText( "\\u{"+i+"}" , 10, 50);
+          ctx.fillText(dict[i], 10, 50);
         }
       } else {
         console.log(httpRequest.status);
@@ -51,7 +51,12 @@
 
   var t=setInterval(makeRequest,1000);
 })();
-
+var dict = {
+  "1":"\u{1F60A}",
+  "2":"\u{1F622}",
+  "3":"\u{1F633}",
+  "4":"\u{1F610}"
+}
 
 </script>
 1
