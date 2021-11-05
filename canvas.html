@@ -15,8 +15,7 @@
 
 <script type="text/javascript">
 
-   var time = new Date();
-  let response = fetch('https://message.cadetconcrete.co.uk/inc/maths/receive.php?time=' + time);
-   console.log(response.headers);
-
+  var myRequest = new Request('https://message.cadetconcrete.co.uk/inc/maths/receive.php');
+  var myHeaders = myRequest.headers;
+  console.log(myHeaders);
 </script>
