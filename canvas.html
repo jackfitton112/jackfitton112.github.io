@@ -36,7 +36,7 @@
     if (httpRequest.readyState === XMLHttpRequest.DONE) {
       if (httpRequest.status === 200) {
         //const element = document.getElementById("text");
-        console.log(httpRequest.responseText);
+        var x = httpRequest.responseText;
 		//rendermsgs(JSON.parse(httpRequest.responseText));
       } else {
         console.log(httpRequest.status);
@@ -46,5 +46,10 @@
 
   var t=setInterval(makeRequest,1000);
 })();
+
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext(x);
+ctx.font = "30px Arial";
+ctx.fillText("Hello World", 10, 50);
 
 </script>
