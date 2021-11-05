@@ -14,7 +14,17 @@
 </html>
 
 <script type="text/javascript">
-      var time = new Date();
-      let response = await fetch('https://message.cadetconcrete.co.uk/inc/maths/receive.php?time=' + time);
-      console.log(response.headers.get("emoji"));
+//      var time = new Date();
+//      let response = await fetch('https://message.cadetconcrete.co.uk/inc/maths/receive.php?time=' + time);
+//      console.log(response.headers.get("emoji"));
+
+let response = await fetch('https://message.cadetconcrete.co.uk/inc/maths/receive.php');
+
+// get one header
+alert(response.headers.get('Content-Type')); // application/json; charset=utf-8
+
+// iterate over all headers
+for (let [key, value] of response.headers) {
+  alert(`${key} = ${value}`);
+}
 </script>
