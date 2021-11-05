@@ -18,6 +18,8 @@
 <script type="text/javascript">
 function del(){
   fetch("https://message.cadetconcrete.co.uk/inc/maths/send.php?id=delete")
+  var c = document.getElementById("myCanvas");
+  var ctx = c.getContext('2d');
   ctx.clearRect(0, 0, 700, 700);
 }
 (function() {//this updates the chat window
