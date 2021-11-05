@@ -59,9 +59,11 @@
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext('2d');
 ctx.font = "30px Arial";
+console.log(document.getElementById('log').val);
 var x = JSON.parse(document.getElementById('log').val);
+
 for (var i of x){
 
-  ctx.fillText("&#"+i, 10, 50);
+  ctx.fillText("&#" + i, 10, 50);
 }
 </script>
