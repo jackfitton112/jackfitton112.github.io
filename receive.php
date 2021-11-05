@@ -12,8 +12,8 @@ $i = 0;
 $data = "[";
 
 while ($row = $result->fetch_assoc()){
-  $r = hexdec($row['emoji']);
-  $data .= "\"{$r}\"";
+  $r = $row['emoji'];
+  $data .= "\"\u{".$r."}\"";
   $i = $i +1;
 
   if ($i == $num){
