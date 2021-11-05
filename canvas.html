@@ -14,39 +14,11 @@
 </html>
 
 <<script type="text/javascript">
-  (function() {//this updates the chat window
-    var httpRequest;
+    function request(){
+      fetch('https://message.cadetconcrete.co.uk/inc/maths/receive.php?time=' + time).then(function (response) {
+        console.log(response.headers.get("emoji"));
+    };
 
-
-    function makeRequest() {
-      httpRequest = new XMLHttpRequest();
-
-      if (!httpRequest) {
-        alert('Giving up :( Cannot create an XMLHTTP instance');
-        return false;
-      }
-      var time = new Date();
-      httpRequest.onreadystatechange = alertContents;
-      httpRequest.open('GET', 'https://message.cadetconcrete.co.uk/inc/maths/receive.php?time=' + time, true);
-      httpRequest.send();
-    }
-
-    function alertContents() {
-      if (httpRequest.readyState === XMLHttpRequest.DONE) {
-        if (httpRequest.status === 200) {
-          // Get the raw header string
-            var headers = httpRequest.getAllResponseHeaders();
-
-            // Convert the header string into an array
-            // of individual headers
-            var arr = headers.trim().split(/[\r\n]+/);
-            console.log(arr);
-        } else {
-          console.log(httpRequest.status);
-        }
-      }
-    }
-
-    var t=setInterval(makeRequest,1000);
+    var t=setInterval(request,1000);
   })();
 </script>
