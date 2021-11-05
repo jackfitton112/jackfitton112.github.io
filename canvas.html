@@ -41,7 +41,8 @@
 
         for (var i of x){
 
-          ctx.fillText(dict[i], 10, 50);
+
+          ctx.fillText(dict[i], getRndInteger(0, 1920), getRndInteger(0, 1080));
         }
       } else {
         console.log(httpRequest.status);
@@ -56,6 +57,9 @@ var dict = {
   "2":"\u{1F622}",
   "3":"\u{1F633}",
   "4":"\u{1F610}"
+}
+function getRndInteger(min, max) {
+  return Math.floor(Math.random() * (max - min) ) + min;
 }
 
 </script>
