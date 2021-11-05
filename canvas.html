@@ -45,7 +45,12 @@ function del(){
         ctx.font = "30px Arial";
         var x = JSON.parse(httpRequest.response);
 		console.log(x)
-		for (var key of x.keys()) {
+		x.forEach(function draw (value, index) {
+			var times = value-prev[index]
+			console.log("current: "+value+"; previous: "+prev[index])
+			console.log("times: "+times)
+		})
+		/*for (var key of x.keys()) {
 			var times = x[key]-prev[key]
 			console.log("x[key]: "+x[key]+" prev[key]: "+prev[key])
 			console.log("times: "+times)
@@ -55,7 +60,7 @@ function del(){
   					ctx.fillText(dict[key], getRndInteger(0, 1920), getRndInteger(0,1080))
 				}
   			console.log(key, value);
-			}
+			}*/
 		}
 		/*
         for (var i of x){
@@ -71,18 +76,8 @@ function del(){
 
   var t=setInterval(makeRequest,1000);
 })();
-var dict = {
-  "1":"\u{1F60A}",
-  "2":"\u{1F622}",
-  "3":"\u{1F633}",
-  "4":"\u{1F610}"
-}
-var prev = {
-	"1":0,
-	"2":0,
-	"3":0,
-	"4":0
-}
+var dict = ["\u{1F60A}","\u{1F622}","\u{1F633}","\u{1F610}"]
+var prev = [0, 0, 0, 0]
 function getRndInteger(min, max) {
   return Math.floor(Math.random() * (max - min) ) + min;
 }
