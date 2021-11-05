@@ -8,7 +8,7 @@
 <body>
 
 <canvas id="myCanvas" width="100" height="200" style="width:100%; height:500px; border:1px solid #000000;"></canvas>
-
+<div id="log" style="display:none;"></div>
 
 </body>
 </html>
@@ -37,6 +37,7 @@
       if (httpRequest.status === 200) {
         //const element = document.getElementById("text");
         var x = httpRequest.responseText;
+        document.getElementById('log').innerHTML = x;
 		//rendermsgs(JSON.parse(httpRequest.responseText));
       } else {
         console.log(httpRequest.status);
