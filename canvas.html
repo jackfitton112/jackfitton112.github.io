@@ -13,11 +13,11 @@
 </body>
 </html>
 
-<<script type="text/javascript">
+<script type="text/javascript">
     function request(){
       fetch('https://message.cadetconcrete.co.uk/inc/maths/receive.php?time=' + time).then(function (response) {
         console.log(response.headers.get("emoji"));
-      })();
+      })()};
 
     var t=setInterval(request,1000);
 
