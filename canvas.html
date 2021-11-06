@@ -75,6 +75,7 @@ function del(){
 			//console.log("current: "+value+"; previous: "+prev[index])
 			//console.log("times: "+times)
 			if (times > 0) {
+				prev[index]=value
 				for (let step = 0; step < times; step++) {
   					//console.log("added type "+index)
 					ctx.fillStyle = dict[index][1]
@@ -82,7 +83,6 @@ function del(){
 					ctx.fillStyle = 'rgba(225,225,225,0.1)';
 					ctx.fillRect(0, 0, canv.width, canv.height);
 				}
-				prev[index]=value
 
 			}
 		})
