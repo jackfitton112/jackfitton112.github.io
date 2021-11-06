@@ -79,7 +79,13 @@ function del(){
 				for (let step = 0; step < times; step++) {
   					//console.log("added type "+index)
 					ctx.fillStyle = dict[index][1]
+					if (index=="2") {
+					var tmpx=getRndInteger(0, canv.width)
+					var tmpy=getRndInteger(0, canv.height)
+					ctx.drawImage(depressedWojak, tmpx-20, tmpy-20, 40, 40)
+					} else {
   					ctx.fillText(dict[index][0], getRndInteger(0, canv.width), getRndInteger(0, canv.height))
+					}
 					ctx.fillStyle = 'rgba(225,225,225,0.1)';
 					ctx.fillRect(0, 0, canv.width, canv.height);
 				}
@@ -106,7 +112,8 @@ var dict = {
   "2":["\u{1F633}", "rgb(100, 100, 100)"],//\u{1F633}", //depressed
   "3":["\u{1F610}", "rgb(255, 0, 0)"]//\u{1F610}" //confused
 }
-
+var depressedWojak = new Image();
+depressedWojak.src = "depressedWojakTransparency.gif";
 
 var prev=[0, 0, 0, 0]
 
