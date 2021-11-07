@@ -7,7 +7,7 @@ header("Access-Control-Allow-Headers: *");
 $response = $_GET['id'];
 
 if ($response == "delete"){
-  $conn->query("UPDATE `emoji` SET `emoji` = '0' WHERE `emoji`.`id` = 4 OR `id` = 3 OR `id` = 2 OR `id` = 1");
+  $conn->query("UPDATE `emoji` SET `emoji` = '0' WHERE `emoji`.`id` = 4 OR `id` = 3 OR `id` = 2 OR `id` = 1 OR `id` = 5");
   exit;
 }
 
@@ -43,6 +43,13 @@ if ($response == "c"){
 
 }
 
+if ($response == "eng"){
+  $res = $conn->query("SELECT * FROM `emoji` WHERE `id` = 101");
+  $row = $res->fetch_assoc();
+  $count = $row['emoji'] + 1;
+  $conn->query("UPDATE `emoji` SET `emoji` = '{$count}' WHERE `emoji`.`id` = 101");
+
+}
 
 
 
