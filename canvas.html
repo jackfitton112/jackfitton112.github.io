@@ -30,9 +30,6 @@ function resizeCanvas() {
 	var leastwidth = (window.innerWidth>window.innerHeight) ? window.innerWidth : window.innerHeight;
     canv.width = leastwidth*0.45;
     canv.height = leastwidth*0.45;
-	/*var charT = document.getElementById("myChart");
-    charT.width = window.innerWidth*0.4;
-    charT.height = window.innerWidth*0.4;*/
 }
 window.onresize = resizeCanvas();
 function del(){
@@ -107,23 +104,18 @@ function del(){
 function getRndInteger(min, max) {
   return Math.floor(Math.random() * (max - min) ) + min;
 }
-/*
-------------------
-images set as seperate vars cos loading reeee (rip scalability)
------------------
-*/
-var depressedImg = new Image()
-depressedImg.src="depressedWojakTransparency.gif"
-var enjineerImg = new Image()
-enjineerImg.src="enjiner.png"
-
+function newImage(src){
+    var tmp = new Image();
+    tmp.src = src;
+    return tmp
+}
 
 var dict = {
   "0":["\u{1F60A}", "rgb(0, 255, 0)"], //\u{1F60A}", //happy
   "1":["\u{1F622}", "rgb(0, 0, 255)"],//\u{1F622}", //sad
-  "2":["\u{1F633}", "rgb(100, 100, 100)", depressedImg],//\u{1F633}", //depressed
+  "2":["\u{1F633}", "rgb(100, 100, 100)", newImage("depressedWojakTransparency.gif")],//\u{1F633}", //depressed
   "3":["\u{1F610}", "rgb(255, 0, 0)"],//\u{1F610}" //confused
-  "4":["enjineer", "rgb(0, 0, 0)", enjineerImg] //enjineer meme
+  "4":["enjineer", "rgb(0, 0, 0)", newImage("enjiner.png")] //enjineer meme
 }
 
 var prev=[0, 0, 0, 0, 0]
