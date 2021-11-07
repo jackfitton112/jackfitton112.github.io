@@ -25,13 +25,65 @@
 
 
 <script type="text/javascript">
+/* CONFIG STUFFS */
+// index of returned array : [fallback unicode/text, chart colour, image if set, image scaling [x, y], toast comment]
+var dict = [
+  ["\u{1F60A}", "#00ff00"], //\u{1F60A}", //happy
+  ["\u{1F622}", "#0000ff"],//\u{1F622}", //sad
+  ["\u{1F633}", "#646464", newImage("depressedWojakTransparency.gif"), [40, 40]],//\u{1F633}", //depressed
+  ["\u{1F610}", "#ff0000"],//\u{1F610}" //confused
+  ["enjineer", "#000000", newImage("enjiner.png"), [100, 100], "enjineer moment"], //enjineer meme
+  ["mafs", "#000000", newImage("mafs.png"), [100, 100], "mafs moment"]//mafs meme
+]
+
+var diffElements=dict.length
+var prev = Array(diffElements).fill(0);
+
+/* Chart.js configs */
+const data = {
+  labels: [
+    'Happy',
+    'Sad',
+    'Depressed',
+	'Confused'
+  ],
+  datasets: [{
+    label: 'Emotions',
+    data: [0, 0, 0, 0],
+    backgroundColor: [
+      dict["0"][1],
+      dict["1"][1],
+	  dict["2"][1],
+      dict["3"][1]
+    ],
+    hoverOffset: 4
+  }]
+};
+
+const config = {
+  type: 'doughnut',
+  data: data,
+  options :{
+
+  }
+
+};
+
+const myChart = new Chart( //render chart
+	document.getElementById('myChart'),
+	config
+	);
+	
+/* FUNCTIONS*/
+
+window.onresize = resizeCanvas();
+
 function resizeCanvas() {
     var canv = document.getElementById("myCanvas");
 	var leastwidth = (window.innerWidth>window.innerHeight) ? window.innerWidth : window.innerHeight;
     canv.width = leastwidth*0.45;
     canv.height = leastwidth*0.45;
 }
-window.onresize = resizeCanvas();
 function del(){
   prev=[0, 0, 0, 0]
   fetch("https://message.cadetconcrete.co.uk/inc/maths/send.php?id=delete")
@@ -42,7 +94,17 @@ function del(){
   data.datasets[0].data=[0, 0, 0, 0]
   myChart.update()
 }
-(function() {//this updates the chat window
+/* HELPERS */
+function getRndInteger(min, max) {
+  return Math.floor(Math.random() * (max - min) ) + min;
+}
+function newImage(src){
+    var tmp = new Image();
+    tmp.src = src;
+    return tmp
+}
+/* MAIN */
+(function() {//"main loop"
   var httpRequest;
 
 
@@ -93,7 +155,7 @@ function del(){
 			if (times < 0) {//if item got cleared
 				ctx.fillStyle = '#ffffff';
 				ctx.fillRect(0, 0, c.width, c.height)
-				prev=[0, 0, 0, 0, 0, 0]
+				prev=Array(diffElements).fill(0);
 			}
 		})
 		data.datasets[0].data=prev.slice(0, 4)
@@ -106,64 +168,6 @@ function del(){
 
   var t=setInterval(makeRequest,100);
 })();
-
-function getRndInteger(min, max) {
-  return Math.floor(Math.random() * (max - min) ) + min;
-}
-function newImage(src){
-    var tmp = new Image();
-    tmp.src = src;
-    return tmp
-}
-/* CONFIG STUFFS */
-// index of returned array : [fallback unicode/text, chart colour, image if set, image scaling [x, y], toast comment]
-var dict = [
-  ["\u{1F60A}", "#00ff00"], //\u{1F60A}", //happy
-  ["\u{1F622}", "#0000ff"],//\u{1F622}", //sad
-  ["\u{1F633}", "#646464", newImage("depressedWojakTransparency.gif"), [40, 40]],//\u{1F633}", //depressed
-  ["\u{1F610}", "#ff0000"],//\u{1F610}" //confused
-  ["enjineer", "#000000", newImage("enjiner.png"), [100, 100], "enjineer moment"], //enjineer meme
-  ["mafs", "#000000", newImage("mafs.png"), [100, 100], "mafs moment"]//mafs meme
-]
-
-var diffElements=dict.length
-var prev = Array(diffElements).fill(0);
-//var prev=[0, 0, 0, 0, 0, 0] //note to self: ALWAYS CHANGE THIS TO BE the EXACT LENGTH OF RETURNED ARRAY or else stuff breaks
-
-const data = {
-  labels: [
-    'Happy',
-    'Sad',
-    'Depressed',
-	'Confused'
-  ],
-  datasets: [{
-    label: 'Emotions',
-    data: [0, 0, 0, 0],
-    backgroundColor: [
-      dict["0"][1],
-      dict["1"][1],
-	  dict["2"][1],
-      dict["3"][1]
-    ],
-    hoverOffset: 4
-  }]
-};
-
-const config = {
-  type: 'doughnut',
-  data: data,
-  options :{
-
-  }
-
-};
-
-const myChart = new Chart( //render chart
-	document.getElementById('myChart'),
-	config
-  //myChart.options.scales.r.pointLabels.font.size = "1rem";
-	);
 
 </script>
 
