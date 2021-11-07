@@ -18,7 +18,7 @@
 
 <p id="log" style=""></p>
 <a onclick="del()" type="button" style="position: fixed; right:5px; bottom:5px" class="waves-effect waves-light btn"><i class="material-icons left">delete</i>Reset Canvas</a>
-
+<p style="position: fixed; left:5px; bottom:5px">If chart displays incorrectly, put browser into windowed mode then back to fullscreen </p>
 <!--<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>-->
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -38,8 +38,8 @@ function resizeCanvas() {
     canv.width = window.innerWidth*0.5;
     canv.height = window.innerHeight*0.9;
 	var charT = document.getElementById("myChart");
-    charT.width = window.innerWidth*0.2;
-    charT.height = window.innerHeight*0.2;
+    charT.width = window.innerWidth*0.4;
+    charT.height = window.innerHeight*0.4;
 }
 function del(){
   prev=[0, 0, 0, 0]
