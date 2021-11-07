@@ -65,6 +65,7 @@ function del(){
         var c = document.getElementById("myCanvas");
         var ctx = c.getContext('2d');
         ctx.font = "30px Arial";
+		ctx.textAlign="center";
         var x = JSON.parse(httpRequest.response);
 		//console.log(x)
 		x.forEach(function draw (value, index) {
@@ -78,11 +79,11 @@ function del(){
 					ctx.fillStyle = dict[index][1]
 					if (dict[index].length>2) {
 						//make it so that if dict[index] has 3 elements (unicode, colour, image) it draws image else unicode
-						let tmpx=getRndInteger(0, c.width)
-						let tmpy=getRndInteger(0, c.height)
-						ctx.drawImage(dict[index][2], tmpx, tmpy, 40, 40)
+						let tmpx=getRndInteger(0, c.width-dict[index][3][0])
+						let tmpy=getRndInteger(0, c.height-dict[index][3][1])
+						ctx.drawImage(dict[index][2], tmpx, tmpy, dict[index][3][0], dict[index][3][1])
 					} else {
-  						ctx.fillText(dict[index][0], getRndInteger(0, c.width), getRndInteger(0, c.height))
+  						ctx.fillText(dict[index][0], getRndInteger(15, c.width-30), getRndInteger(15, c.height-15)) //30 being the font size, we dont want the unicode intersecting with edge
 					}
 					ctx.fillStyle = 'rgba(225,225,225,0.1)';
 					ctx.fillRect(0, 0, c.width, c.height);
@@ -109,13 +110,13 @@ function newImage(src){
     tmp.src = src;
     return tmp
 }
-
+// index of returned array : [fallback unicode/text, chart colour, image if set, image scaling [x, y]]
 var dict = {
-  "0":["\u{1F60A}", "rgb(0, 255, 0)"], //\u{1F60A}", //happy
-  "1":["\u{1F622}", "rgb(0, 0, 255)"],//\u{1F622}", //sad
-  "2":["\u{1F633}", "rgb(100, 100, 100)", newImage("depressedWojakTransparency.gif")],//\u{1F633}", //depressed
-  "3":["\u{1F610}", "rgb(255, 0, 0)"],//\u{1F610}" //confused
-  "4":["enjineer", "rgb(0, 0, 0)", newImage("enjiner.png")] //enjineer meme
+  "0":["\u{1F60A}", "#00ff00"], //\u{1F60A}", //happy
+  "1":["\u{1F622}", "#0000ff"],//\u{1F622}", //sad
+  "2":["\u{1F633}", "#646464", newImage("depressedWojakTransparency.gif"), [40, 40]],//\u{1F633}", //depressed
+  "3":["\u{1F610}", "#ff0000"],//\u{1F610}" //confused
+  "4":["enjineer", "#000000", newImage("enjiner.png"), [100, 100]] //enjineer meme
 }
 
 var prev=[0, 0, 0, 0, 0]
@@ -129,7 +130,7 @@ const data = {
   ],
   datasets: [{
     label: 'Emotions',
-    data: [10, 10, 10, 10],
+    data: [0, 0, 0, 0],
     backgroundColor: [
       dict["0"][1],
       dict["1"][1],
