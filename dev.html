@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Untitled</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body style="background: rgb(49,49,49);">
+    <h1 class="display-1 text-center text-muted" style="color: rgb(255,255,255);">Maths React</h1>
+    <div><button class="btn btn-success" type="button" style="width: 45%;height: 100px;margin-right: 2.5%;margin-left: 2.5%;" onclick="h()">Happy</button><button class="btn btn-primary" type="button" style="width: 45%;height: 100px;margin-right: 2.5%;margin-left: 2.5%;" onclick="s()">Sad</button></div>
+    <div style="margin-top: 20px;">
+      <button class="btn btn-secondary" type="button" style="width: 45%;height: 100px;margin-right: 2.5%;margin-left: 2.5%;" onclick="d()">Depressed</button>
+      <button class="btn btn-primary" type="button" style="width: 45%;height: 100px;margin-right: 2.5%;margin-left: 2.5%;background: linear-gradient(-151deg, var(--bs-blue), rgb(122,80,156) 53%, var(--bs-red));" onclick="c()">Confused</button>
+    </div>
+    <div style="margin-top: 20px;">
+      <button class="btn btn-secondary" type="button" style="width: 45%;height: 100px;margin-right: 2.5%;margin-left: 2.5%;" onclick="stonk()">Stonks</button>
+      <button class="btn btn-primary" type="button" style="width: 45%;height: 100px;margin-right: 2.5%;margin-left: 2.5%;background: linear-gradient(-151deg, var(--bs-blue), rgb(122,80,156) 53%, var(--bs-red));" onclick="eng()">Enjener</button>
+    </div>
+    <script>
+
+function h(){
+  fetch("https://message.cadetconcrete.co.uk/inc/maths/send.php?id=h")
+};
+function s(){
+  fetch("https://message.cadetconcrete.co.uk/inc/maths/send.php?id=s")
+};
+function d(){
+  fetch("https://message.cadetconcrete.co.uk/inc/maths/send.php?id=d")
+};
+function c(){
+  fetch("https://message.cadetconcrete.co.uk/inc/maths/send.php?id=c")
+};
+function stonk(){
+  fetch("https://message.cadetconcrete.co.uk/inc/maths/send.php?id=stonk")
+};
+function eng(){
+  fetch("https://message.cadetconcrete.co.uk/inc/maths/send.php?id=eng")
+};
+
+</script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>
