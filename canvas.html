@@ -34,7 +34,7 @@ function resizeCanvas() {
     charT.width = window.innerWidth*0.4;
     charT.height = window.innerWidth*0.4;*/
 }
-window.onresize = resizeCanvas;
+window.onresize = resizeCanvas();
 function del(){
   prev=[0, 0, 0, 0]
   fetch("https://message.cadetconcrete.co.uk/inc/maths/send.php?id=delete")
@@ -69,7 +69,6 @@ function del(){
         var ctx = c.getContext('2d');
         ctx.font = "30px Arial";
         var x = JSON.parse(httpRequest.response);
-		var canv = document.getElementById("myCanvas");
 		//console.log(x)
 		x.forEach(function draw (value, index) {
 			var times = value-prev[index]
@@ -80,20 +79,21 @@ function del(){
 				for (let step = 0; step < times; step++) {
   					//console.log("added type "+index)
 					ctx.fillStyle = dict[index][1]
-					if (index=="2") {
-					var tmpx=getRndInteger(0, canv.width)
-					var tmpy=getRndInteger(0, canv.height)
-					ctx.drawImage(depressedWojak, tmpx-20, tmpy-20, 40, 40)
+					if (dict[index].length>2) {
+						//make it so that if dict[index] has 3 elements (unicode, colour, image) it draws image else unicode
+						let tmpx=getRndInteger(0, c.width)
+						let tmpy=getRndInteger(0, c.height)
+						ctx.drawImage(dict[index][2], tmpx, tmpy, 40, 40)
 					} else {
-  					ctx.fillText(dict[index][0], getRndInteger(0, canv.width), getRndInteger(0, canv.height))
+  						ctx.fillText(dict[index][0], getRndInteger(0, c.width), getRndInteger(0, c.height))
 					}
 					ctx.fillStyle = 'rgba(225,225,225,0.1)';
-					ctx.fillRect(0, 0, canv.width, canv.height);
+					ctx.fillRect(0, 0, c.width, c.height);
 				}
 
 			}
 		})
-		data.datasets[0].data=prev
+		data.datasets[0].data=prev.slice(0, 4)
 		myChart.update()
       } else {
         console.log(httpRequest.status);
@@ -101,22 +101,32 @@ function del(){
     }
   }
 
-  var t=setInterval(makeRequest,100);
+  var t=setInterval(makeRequest,1000);
 })();
 
 function getRndInteger(min, max) {
   return Math.floor(Math.random() * (max - min) ) + min;
 }
-var dict = {
-  "0":["\u{1F60A}", "rgb(0, 255, 0)"],//\u{1F60A}", //happy
-  "1":["\u{1F622}", "rgb(0, 0, 255)"],//\u{1F622}", //sad
-  "2":["\u{1F633}", "rgb(100, 100, 100)"],//\u{1F633}", //depressed
-  "3":["\u{1F610}", "rgb(255, 0, 0)"]//\u{1F610}" //confused
-}
-var depressedWojak = new Image();
-depressedWojak.src = "depressedWojakTransparency.gif";
+/*
+------------------
+images set as seperate vars cos loading reeee (rip scalability)
+-----------------
+*/
+var depressedImg = new Image()
+depressedImg.src="depressedWojakTransparency.gif"
+var enjineerImg = new Image()
+enjineerImg.src="enjiner.png"
 
-var prev=[0, 0, 0, 0]
+
+var dict = {
+  "0":["\u{1F60A}", "rgb(0, 255, 0)"], //\u{1F60A}", //happy
+  "1":["\u{1F622}", "rgb(0, 0, 255)"],//\u{1F622}", //sad
+  "2":["\u{1F633}", "rgb(100, 100, 100)", depressedImg],//\u{1F633}", //depressed
+  "3":["\u{1F610}", "rgb(255, 0, 0)"],//\u{1F610}" //confused
+  "4":["enjineer", "rgb(0, 0, 0)", enjineerImg] //enjineer meme
+}
+
+var prev=[0, 0, 0, 0, 0]
 
 const data = {
   labels: [
