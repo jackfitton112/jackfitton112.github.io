@@ -11,6 +11,31 @@ if ($response == "delete"){
   exit;
 }
 
+if ($response == "rh"){
+  $conn->query("UPDATE `emoji` SET `emoji` = '0' WHERE `emoji`.`id` = 1;");
+  exit;
+}
+if ($response == "rs"){
+  $conn->query("UPDATE `emoji` SET `emoji` = '0' WHERE `emoji`.`id` = 2;");
+  exit;
+}
+if ($response == "rd"){
+  $conn->query("UPDATE `emoji` SET `emoji` = '0' WHERE `emoji`.`id` = 3;");
+  exit;
+}
+if ($response == "rc"){
+  $conn->query("UPDATE `emoji` SET `emoji` = '0' WHERE `emoji`.`id` = 4;");
+  exit;
+}
+if ($response == "reng"){
+  $conn->query("UPDATE `emoji` SET `emoji` = '0' WHERE `emoji`.`id` = 101;");
+  exit;
+}
+if ($response == "rmafs"){
+  $conn->query("UPDATE `emoji` SET `emoji` = '0' WHERE `emoji`.`id` = 102;");
+  exit;
+}
+
 
 if ($response == "h"){
   $res = $conn->query("SELECT * FROM `emoji` WHERE `id` = 1");
