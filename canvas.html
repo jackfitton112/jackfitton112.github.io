@@ -6,12 +6,12 @@
 	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 </head>
 
-<body onload="resizeCanvas()">
+<body onload="resizeCanvas(); Zoom();">
 
 <div>
 <canvas id="myCanvas" width="700" height="700" style="border:1px solid #000000; float:left;"></canvas>
 </div>
-<div class="chart-container" style="position: relative; height:40vh; width:40vw; float:left;">
+<div class="chart-container" style="position: fixed; float:left; width 40%">
   <canvas id="myChart"  width="700" height="700"></canvas>
 </div>
 
@@ -23,6 +23,13 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+<script>
+   function Zoom() {
+       document.body.style.zoom = "80%";
+       document.body.style.zoom = "100%";
+   }
+</script>
 
 
 <script type="text/javascript">
@@ -140,6 +147,10 @@ const data = {
 const config = {
   type: 'doughnut',
   data: data,
+  options :{
+    maintainAspectRatio: true
+  }
+
 };
 
 const myChart = new Chart( //render chart
