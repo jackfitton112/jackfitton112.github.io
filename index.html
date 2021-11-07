@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Untitled</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/styles.css">
-    <script data-ad-client="ca-pub-7010495490689619" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </head>
 
 <body style="background: rgb(49,49,49);">
     <h1 class="display-1 text-center text-muted" style="color: rgb(255,255,255);">Maths React</h1>
     <div><button class="btn btn-success" type="button" style="width: 45%;height: 100px;margin-right: 2.5%;margin-left: 2.5%;" onclick="h()">Happy</button><button class="btn btn-primary" type="button" style="width: 45%;height: 100px;margin-right: 2.5%;margin-left: 2.5%;" onclick="s()">Sad</button></div>
-    <div style="margin-top: 20px;"><button class="btn btn-secondary" type="button" style="width: 45%;height: 100px;margin-right: 2.5%;margin-left: 2.5%;" onclick="d()">Depressed</button><button class="btn btn-primary" type="button" style="width: 45%;height: 100px;margin-right: 2.5%;margin-left: 2.5%;background: linear-gradient(-151deg, var(--bs-blue), rgb(122,80,156) 53%, var(--bs-red));" onclick="c()">Confused</button></div><script>
+    <div style="margin-top: 20px;"><button class="btn btn-secondary" type="button" style="width: 45%;height: 100px;margin-right: 2.5%;margin-left: 2.5%;" onclick="d()">Depressed</button><button class="btn btn-primary" type="button" style="width: 45%;height: 100px;margin-right: 2.5%;margin-left: 2.5%;background: linear-gradient(-151deg, var(--bs-blue), rgb(122,80,156) 53%, var(--bs-red));" onclick="c()" id="rainbow">Confused</button></div><script>
 
 function h(){
   fetch("https://message.cadetconcrete.co.uk/inc/maths/send.php?id=h")
@@ -28,7 +26,14 @@ function d(){
 function c(){
   fetch("https://message.cadetconcrete.co.uk/inc/maths/send.php?id=c")
 };
-
+var hue=0
+function nextColor() {
+	let rnbw = document.getElementById("rainbow")
+	rnbw.style.color="hsl("+hue+", 100%, 50%)"
+	hue+=4
+	if (hue>360) {hue=0}
+}
+setInterval(nextColor, 100)
 </script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
