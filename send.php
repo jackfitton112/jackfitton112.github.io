@@ -50,6 +50,13 @@ if ($response == "eng"){
   $conn->query("UPDATE `emoji` SET `emoji` = '{$count}' WHERE `emoji`.`id` = 101");
 
 }
+if ($response == "mafs"){
+  $res = $conn->query("SELECT * FROM `emoji` WHERE `id` = 102");
+  $row = $res->fetch_assoc();
+  $count = $row['emoji'] + 1;
+  $conn->query("UPDATE `emoji` SET `emoji` = '{$count}' WHERE `emoji`.`id` = 102");
+
+}
 
 
 
