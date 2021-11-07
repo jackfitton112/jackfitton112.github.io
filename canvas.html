@@ -6,7 +6,7 @@
 	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 </head>
 
-<body onload="resizeCanvas(); Zoom();">
+<body onload="resizeCanvas()">
 
 <div>
 <canvas id="myCanvas" width="700" height="700" style="border:1px solid #000000; float:left;"></canvas>
@@ -148,7 +148,7 @@ const config = {
   type: 'doughnut',
   data: data,
   options :{
-    maintainAspectRatio: false
+
   }
 
 };
@@ -156,6 +156,7 @@ const config = {
 const myChart = new Chart( //render chart
 	document.getElementById('myChart'),
 	config
+  myChart.options.scales.r.pointLabels.font.size = "1rem";
 	);
 
 </script>
