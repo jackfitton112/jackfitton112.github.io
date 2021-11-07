@@ -82,6 +82,9 @@ function del(){
 						let tmpx=getRndInteger(0, c.width-dict[index][3][0])
 						let tmpy=getRndInteger(0, c.height-dict[index][3][1])
 						ctx.drawImage(dict[index][2], tmpx, tmpy, dict[index][3][0], dict[index][3][1])
+						if (dict[index].length>4) {
+						M.toast({html: dict[index][4], displayLength: 1500})
+						}
 					} else {
   						ctx.fillText(dict[index][0], getRndInteger(15, c.width-30), getRndInteger(15, c.height-15)) //30 being the font size, we dont want the unicode intersecting with edge
 					}
@@ -99,7 +102,7 @@ function del(){
     }
   }
 
-  var t=setInterval(makeRequest,1000);
+  var t=setInterval(makeRequest,100);
 })();
 
 function getRndInteger(min, max) {
@@ -116,7 +119,7 @@ var dict = {
   "1":["\u{1F622}", "#0000ff"],//\u{1F622}", //sad
   "2":["\u{1F633}", "#646464", newImage("depressedWojakTransparency.gif"), [40, 40]],//\u{1F633}", //depressed
   "3":["\u{1F610}", "#ff0000"],//\u{1F610}" //confused
-  "4":["enjineer", "#000000", newImage("enjiner.png"), [100, 100]] //enjineer meme
+  "4":["enjineer", "#000000", newImage("enjiner.png"), [100, 100], "enjineer moment"] //enjineer meme
 }
 
 var prev=[0, 0, 0, 0, 0]
