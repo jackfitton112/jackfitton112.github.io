@@ -83,8 +83,10 @@ function del(){
 					} else {
   						ctx.fillText(dict[index][0], getRndInteger(15, c.width-30), getRndInteger(15, c.height-15)) //30 being the font size, we dont want the unicode intersecting with edge
 					}
-					ctx.fillStyle = 'rgba(225,225,225,0.1)';
+					ctx.globalCompositeOperation='source-atop';
+					ctx.fillStyle = 'rgba(254,255,255,0.1)';
 					ctx.fillRect(0, 0, c.width, c.height);
+					ctx.globalCompositeOperation='source-over';
 				}
 
 			}
