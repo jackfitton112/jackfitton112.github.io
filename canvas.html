@@ -11,8 +11,8 @@
 <div>
 <canvas id="myCanvas" width="700" height="700" style="border:1px solid #000000; float:left;"></canvas>
 </div>
-<div class="chart-container" style="position: relative; float:left; width:40vh; height:40vw;">
-  <canvas id="myChart"  width="700" height="700"></canvas>
+<div class="chart-container" style="position: relative; float:right; width:45vw; height:45vw;">
+  <canvas id="myChart"></canvas>
 </div>
 
 
@@ -24,22 +24,15 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-<script>
-   function Zoom() {
-       document.body.style.zoom = "80%";
-       document.body.style.zoom = "100%";
-   }
-</script>
-
 
 <script type="text/javascript">
 function resizeCanvas() {
     var canv = document.getElementById("myCanvas");
     canv.width = window.innerWidth*0.5;
     canv.height = window.innerHeight*0.9;
-	var charT = document.getElementById("myChart");
+	/*var charT = document.getElementById("myChart");
     charT.width = window.innerWidth*0.4;
-    charT.height = window.innerWidth*0.4;
+    charT.height = window.innerWidth*0.4;*/
 }
 function del(){
   prev=[0, 0, 0, 0]
