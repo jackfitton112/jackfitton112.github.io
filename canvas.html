@@ -9,16 +9,15 @@
 <body onload="resizeCanvas()">
 
 <div>
-<canvas id="myCanvas" width="700" height="700" style="border:1px solid #000000; float:left;"></canvas>
+<canvas id="myCanvas" width="700" height="700" style="border:1px solid #000000; float:left; margin:2vmax"></canvas>
 </div>
-<div class="chart-container" style="position: relative; float:right; width:45vw; height:45vw;">
+<div class="chart-container" style="position: relative; float:left; width:45vmax; height:45vmax; margin:2vmax">
   <canvas id="myChart"></canvas>
 </div>
 
 
 <p id="log" style=""></p>
 <a onclick="del()" type="button" style="position: fixed; right:5px; bottom:5px" class="waves-effect waves-light btn"><i class="material-icons left">delete</i>Reset Canvas</a>
-<p style="position: fixed; left:5px; bottom:5px">If chart displays incorrectly, put browser into windowed mode then back to fullscreen </p>
 <!--<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>-->
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -28,12 +27,14 @@
 <script type="text/javascript">
 function resizeCanvas() {
     var canv = document.getElementById("myCanvas");
-    canv.width = window.innerWidth*0.5;
-    canv.height = window.innerHeight*0.9;
+	var leastwidth = (window.innerWidth>window.innerHeight) ? window.innerWidth : window.innerHeight;
+    canv.width = leastwidth*0.45;
+    canv.height = leastwidth*0.45;
 	/*var charT = document.getElementById("myChart");
     charT.width = window.innerWidth*0.4;
     charT.height = window.innerWidth*0.4;*/
 }
+window.onresize = resizeCanvas;
 function del(){
   prev=[0, 0, 0, 0]
   fetch("https://message.cadetconcrete.co.uk/inc/maths/send.php?id=delete")
