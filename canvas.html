@@ -67,18 +67,13 @@ function del(){
         ctx.font = "30px Arial";
 		ctx.textAlign="center";
         var x = JSON.parse(httpRequest.response);
-		//console.log(x)
 		x.forEach(function draw (value, index) {
 			var times = value-prev[index]
-			//console.log("current: "+value+"; previous: "+prev[index])
-			//console.log("times: "+times)
-			if (times > 0) {
+			if (times > 0) { // if new item got added
 				prev[index]=value
 				for (let step = 0; step < times; step++) {
-  					//console.log("added type "+index)
 					ctx.fillStyle = dict[index][1]
 					if (dict[index].length>2) {
-						//make it so that if dict[index] has 3 elements (unicode, colour, image) it draws image else unicode
 						let tmpx=getRndInteger(0, c.width-dict[index][3][0])
 						let tmpy=getRndInteger(0, c.height-dict[index][3][1])
 						ctx.drawImage(dict[index][2], tmpx, tmpy, dict[index][3][0], dict[index][3][1])
@@ -92,6 +87,11 @@ function del(){
 					ctx.fillRect(0, 0, c.width, c.height);
 				}
 
+			}
+			if (times < 0) {//if item got cleared
+				ctx.fillStyle = 'rgba(225,225,225,1)';
+				ctx.fillRect(0, 0, c.width, c.height)
+				prev[index]=value
 			}
 		})
 		data.datasets[0].data=prev.slice(0, 4)
@@ -119,11 +119,11 @@ var dict = {
   "1":["\u{1F622}", "#0000ff"],//\u{1F622}", //sad
   "2":["\u{1F633}", "#646464", newImage("depressedWojakTransparency.gif"), [40, 40]],//\u{1F633}", //depressed
   "3":["\u{1F610}", "#ff0000"],//\u{1F610}" //confused
-  "4":["enjineer", "#000000", newImage("enjiner.png"), [100, 100], "enjineer moment"] //enjineer meme
+  "4":["enjineer", "#000000", newImage("enjiner.png"), [100, 100], "enjineer moment"], //enjineer meme
   "5":["mafs", "#000000", newImage("mafs.png"), [100, 100], "mafs moment"]//mafs meme
 }
 
-var prev=[0, 0, 0, 0, 0]
+var prev=[0, 0, 0, 0, 0, 0] //note to self: ALWAYS CHANGE THIS TO BE the EXACT LENGTH OF RETURNED ARRAY or else stuff breaks
 
 const data = {
   labels: [
