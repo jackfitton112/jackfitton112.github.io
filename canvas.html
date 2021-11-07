@@ -91,7 +91,7 @@ function del(){
 			if (times < 0) {//if item got cleared
 				ctx.fillStyle = 'rgba(225,225,225,1)';
 				ctx.fillRect(0, 0, c.width, c.height)
-				prev[index]=value
+				prev=[0, 0, 0, 0, 0, 0]
 			}
 		})
 		data.datasets[0].data=prev.slice(0, 4)
