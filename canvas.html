@@ -115,17 +115,20 @@ function newImage(src){
     tmp.src = src;
     return tmp
 }
+/* CONFIG STUFFS */
 // index of returned array : [fallback unicode/text, chart colour, image if set, image scaling [x, y], toast comment]
-var dict = {
-  "0":["\u{1F60A}", "#00ff00"], //\u{1F60A}", //happy
-  "1":["\u{1F622}", "#0000ff"],//\u{1F622}", //sad
-  "2":["\u{1F633}", "#646464", newImage("depressedWojakTransparency.gif"), [40, 40]],//\u{1F633}", //depressed
-  "3":["\u{1F610}", "#ff0000"],//\u{1F610}" //confused
-  "4":["enjineer", "#000000", newImage("enjiner.png"), [100, 100], "enjineer moment"], //enjineer meme
-  "5":["mafs", "#000000", newImage("mafs.png"), [100, 100], "mafs moment"]//mafs meme
-}
+var dict = [
+  ["\u{1F60A}", "#00ff00"], //\u{1F60A}", //happy
+  ["\u{1F622}", "#0000ff"],//\u{1F622}", //sad
+  ["\u{1F633}", "#646464", newImage("depressedWojakTransparency.gif"), [40, 40]],//\u{1F633}", //depressed
+  ["\u{1F610}", "#ff0000"],//\u{1F610}" //confused
+  ["enjineer", "#000000", newImage("enjiner.png"), [100, 100], "enjineer moment"], //enjineer meme
+  ["mafs", "#000000", newImage("mafs.png"), [100, 100], "mafs moment"]//mafs meme
+]
 
-var prev=[0, 0, 0, 0, 0, 0] //note to self: ALWAYS CHANGE THIS TO BE the EXACT LENGTH OF RETURNED ARRAY or else stuff breaks
+var diffElements=dict.length
+var prev = Array(diffElements).fill(0);
+//var prev=[0, 0, 0, 0, 0, 0] //note to self: ALWAYS CHANGE THIS TO BE the EXACT LENGTH OF RETURNED ARRAY or else stuff breaks
 
 const data = {
   labels: [
