@@ -11,7 +11,7 @@
 <div>
 <canvas id="myCanvas" width="700" height="700" style="border:1px solid #000000; float:left;"></canvas>
 </div>
-<div class="chart-container" style="position: fixed; float:left; width 40%">
+<div class="chart-container" style="position: relative; float:left; width:40vh; height:40vw;">
   <canvas id="myChart"  width="700" height="700"></canvas>
 </div>
 
@@ -148,7 +148,7 @@ const config = {
   type: 'doughnut',
   data: data,
   options :{
-    maintainAspectRatio: true
+    maintainAspectRatio: false
   }
 
 };
