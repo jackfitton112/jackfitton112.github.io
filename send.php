@@ -35,6 +35,10 @@ if ($response == "rmafs"){
   $conn->query("UPDATE `emoji` SET `emoji` = '0' WHERE `emoji`.`id` = 102;");
   exit;
 }
+if ($response == "rdoge"){
+  $conn->query("UPDATE `emoji` SET `emoji` = '0' WHERE `emoji`.`id` = 103;");
+  exit;
+}
 
 
 if ($response == "h"){
@@ -80,6 +84,13 @@ if ($response == "mafs"){
   $row = $res->fetch_assoc();
   $count = $row['emoji'] + 1;
   $conn->query("UPDATE `emoji` SET `emoji` = '{$count}' WHERE `emoji`.`id` = 102");
+
+}
+if ($response == "doge"){
+  $res = $conn->query("SELECT * FROM `emoji` WHERE `id` = 103");
+  $row = $res->fetch_assoc();
+  $count = $row['emoji'] + 1;
+  $conn->query("UPDATE `emoji` SET `emoji` = '{$count}' WHERE `emoji`.`id` = 103");
 
 }
 

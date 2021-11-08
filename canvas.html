@@ -2,8 +2,10 @@
 <html>
 
 <head>
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 
 <body onload="resizeCanvas()">
@@ -18,10 +20,9 @@
 
 <p id="log" style=""></p>
 <a onclick="del()" type="button" style="position: fixed; right:5px; bottom:5px" class="waves-effect waves-light btn"><i class="material-icons left">delete</i>Reset Canvas</a>
-<!--<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>-->
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+
 
 
 <script type="text/javascript">
@@ -33,7 +34,8 @@ var dict = [
   ["\u{1F633}", "#646464", newImage("depressedWojakTransparency.gif"), [40, 40]],//\u{1F633}", //depressed
   ["\u{1F610}", "#ff0000"],//\u{1F610}" //confused
   ["enjineer", "#000000", newImage("enjiner.png"), [100, 100], "enjineer moment"], //enjineer meme
-  ["mafs", "#000000", newImage("mafs.png"), [100, 100], "mafs moment"]//mafs meme
+  ["mafs", "#000000", newImage("mafs.png"), [100, 100], "mafs moment"],//mafs meme
+  ["Doge", "#000000", newImage("doge.png"), [100, 100], ""]//doge meme
 ]
 
 var diffElements=dict.length
@@ -73,7 +75,7 @@ const myChart = new Chart( //render chart
 	document.getElementById('myChart'),
 	config
 	);
-	
+
 /* FUNCTIONS*/
 
 window.onresize = resizeCanvas();
@@ -170,19 +172,5 @@ function newImage(src){
 })();
 
 </script>
-
-<script type="text/javascript">
-
-</script>
-
 </body>
 </html>
-
-
-
-<script>
-
-
-
-
-</script>
