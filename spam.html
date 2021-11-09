@@ -43,12 +43,12 @@
 
     // Run the function again every second if the count is not zero
     if(count !== 0){
-      spn.textContent = "I Have Calmed Down";
       timer = setTimeout(countDown, 1000);
       count--; // decrease the timer
     } else {
       // Enable the button
       btn.removeAttribute("disabled");
+      spn.textContent = "I Have Calmed Down";
     }
   }());
 
