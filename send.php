@@ -5,6 +5,11 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: *");
 
 $response = $_GET['id'];
+$token = $_GET['token'];
+
+$check = md5(date("H:m"));
+
+if ($token == $check){
 
 if ($response == "delete"){
   $conn->query("UPDATE `emoji` SET `emoji` = '0' WHERE 1");
@@ -92,7 +97,10 @@ if ($response == "doge"){
   $count = $row['emoji'] + 1;
   $conn->query("UPDATE `emoji` SET `emoji` = '{$count}' WHERE `emoji`.`id` = 103");
 
+}} else {
+  exit;
 }
+
 
 
 
