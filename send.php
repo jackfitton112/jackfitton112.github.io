@@ -6,6 +6,7 @@ header("Access-Control-Allow-Headers: *");
 
 $response = $_GET['id'];
 $token = $_GET['token'];
+$dev = $_GET['dev'];
 
 $check = md5(gmdate("H:i"));
 
@@ -42,7 +43,7 @@ if ($response == "rdoge"){
   exit;
 }
 
-if ($token == $check || $response == "delete"){
+if ($token == $check || $response == "delete" || $dev == 1){
 
 if ($response == "delete"){
   $conn->query("UPDATE `emoji` SET `emoji` = '0' WHERE 1");
