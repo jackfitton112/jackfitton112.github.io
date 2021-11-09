@@ -45,7 +45,7 @@ function buttonEvent(id) {
 }
 function gentoken() {
 	let date = new Date();
-	let time = formatDate(date, "hh:mm")
+	let time = formatDate(date, "hh:mm", true)
 	console.log(time)
 	return MD5(time)
 }
