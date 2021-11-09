@@ -33,6 +33,7 @@ var dict = [
   ["\u{1F622}", "#0000ff"],//\u{1F622}", //sad
   ["\u{1F633}", "#646464", newImage("depressedWojakTransparency.gif"), [40, 40]],//\u{1F633}", //depressed
   ["\u{1F610}", "#ff0000"],//\u{1F610}" //confused
+  ["\u{1F54A}", "#ff0000"],//\U{1F54A}" //Preach
   ["enjineer", "#000000", newImage("enjiner.png"), [100, 100], "enjineer moment"], //enjineer meme
   ["mafs", "#000000", newImage("mafs.png"), [100, 100], "mafs moment"],//mafs meme
   ["Doge", "#000000", newImage("doge.png"), [100, 100]]//doge meme
@@ -44,10 +45,11 @@ var prev = Array(diffElements).fill(0);
 /* Chart.js configs */
 const data = {
   labels: [
-    'Happy',
-    'Sad',
-    'Depressed',
-	'Confused'
+  'Happy',
+  'Sad',
+  'Depressed',
+	'Confused',
+  'preach'
   ],
   datasets: [{
     label: 'Emotions',
@@ -55,8 +57,9 @@ const data = {
     backgroundColor: [
       dict["0"][1],
       dict["1"][1],
-	  dict["2"][1],
-      dict["3"][1]
+	    dict["2"][1],
+      dict["3"][1],
+      dict["4"][1]
     ],
     hoverOffset: 4
   }]
