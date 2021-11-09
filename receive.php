@@ -6,7 +6,7 @@ header("Access-Control-Allow-Headers: *");
 header("Access-Control-Expose-Headers: *");
 
 $data = array();
-$result = $conn->query("SELECT * FROM `emoji` WHERE 1 ASC");
+$result = $conn->query("SELECT * FROM `emoji` ORDER BY `emoji`.`id` ASC");
 
 while ($row = $result->fetch_assoc()){
 $data2 = $row['emoji'];

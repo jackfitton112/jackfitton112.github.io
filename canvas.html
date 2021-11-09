@@ -48,16 +48,18 @@ const data = {
   'Happy',
   'Sad',
   'Depressed',
-	'Confused'
+	'Confused',
+  'Preach'
   ],
   datasets: [{
     label: 'Emotions',
-    data: [0, 0, 0, 0],
+    data: [0, 0, 0, 0, 0],
     backgroundColor: [
       dict["0"][1],
       dict["1"][1],
 	    dict["2"][1],
-      dict["3"][1]
+      dict["3"][1],
+      dict["4"][1]
     ],
     hoverOffset: 4
   }]
@@ -94,7 +96,7 @@ function del(){
   var ctx = c.getContext('2d');
   var canv = document.getElementById("myCanvas");
   ctx.clearRect(0, 0, canv.width, canv.height);
-  data.datasets[0].data=[0, 0, 0, 0]
+  data.datasets[0].data=[0, 0, 0, 0, 0]
   myChart.update()
 }
 /* HELPERS */
