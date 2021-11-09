@@ -22,7 +22,7 @@
 	This page is not here.
 	</i>
 </p>
-  <center><a class="btn btn-primary text-center" disabled type="button" id="btn" href="https://mathsreact.online"><span id="count"></span> I Have calmed down</a></center>
+  <center><a class="btn btn-primary text-center" disabled type="button" id="btn" href="https://mathsreact.online"><span id="count"></span></a></center>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
@@ -43,6 +43,7 @@
 
     // Run the function again every second if the count is not zero
     if(count !== 0){
+      spn.textContent = "I Have Calmed Down";
       timer = setTimeout(countDown, 1000);
       count--; // decrease the timer
     } else {
