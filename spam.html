@@ -22,7 +22,7 @@
 	This page is not here.
 	</i>
 </p>
-  <center><a class="btn btn-primary text-center" type="button" id="btn" href="https://mathsreact.online"><span id="count"></span> I Have calmed down</a></center>
+  <center><a class="btn btn-primary text-center" disabled type="button" id="btn" href="https://mathsreact.online"><span id="count"></span> I Have calmed down</a></center>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
@@ -39,7 +39,7 @@
 
   (function countDown(){
     // Display counter and start counting down
-    spn.textContent = count;
+    spn.textContent = "("+count+")";
 
     // Run the function again every second if the count is not zero
     if(count !== 0){
