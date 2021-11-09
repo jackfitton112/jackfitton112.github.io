@@ -10,40 +10,61 @@ $dev = $_GET['dev'];
 
 $check = md5(gmdate("H:i"));
 
-//echo $token;
-//echo $check;
-echo gmdate("H:i");
+$array = array (
 
-if ($response == "rh"){
-  $conn->query("UPDATE `emoji` SET `emoji` = '0' WHERE `emoji`.`id` = 1;");
-  exit;
-}
-if ($response == "rs"){
-  $conn->query("UPDATE `emoji` SET `emoji` = '0' WHERE `emoji`.`id` = 2;");
-  exit;
-}
-if ($response == "rd"){
-  $conn->query("UPDATE `emoji` SET `emoji` = '0' WHERE `emoji`.`id` = 3;");
-  exit;
-}
-if ($response == "rc"){
-  $conn->query("UPDATE `emoji` SET `emoji` = '0' WHERE `emoji`.`id` = 4;");
-  exit;
-}
-if ($response == "reng"){
-  $conn->query("UPDATE `emoji` SET `emoji` = '0' WHERE `emoji`.`id` = 101;");
-  exit;
-}
-if ($response == "rmafs"){
-  $conn->query("UPDATE `emoji` SET `emoji` = '0' WHERE `emoji`.`id` = 102;");
-  exit;
-}
-if ($response == "rdoge"){
-  $conn->query("UPDATE `emoji` SET `emoji` = '0' WHERE `emoji`.`id` = 103;");
-  exit;
+  1 => "h",
+  2 => "s",
+  3 => "d",
+  4 => "c",
+  101 => "eng",
+  102 => "mafs",
+  103 => "doge"
+
+)
+
+$key = array_search($response, $array);
+$pos = strpos($response, "r");
+
+// Functions
+function insertdata ($key){
+
+  include "db.php";
+  $res = $conn->query("SELECT * FROM `emoji` WHERE `id` = {$key}");
+  $row = $res->fetch_assoc();
+  $count = $row['emoji'] + 1;
+  $conn->query("UPDATE `emoji` SET `emoji` = '{$count}' WHERE `emoji`.`id` = {$key}");
+
+
 }
 
-if ($token == $check || $response == "delete" || $dev == 1){
+
+if ($pos == false && $response !== "delete"){
+  if($check == $token || $dev == 1){
+    insertdata($key);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+if ($token == $check || $response == "delete" || $dev == "1"){
 
 if ($response == "delete"){
   $conn->query("UPDATE `emoji` SET `emoji` = '0' WHERE 1");
@@ -103,11 +124,43 @@ if ($response == "doge"){
   $count = $row['emoji'] + 1;
   $conn->query("UPDATE `emoji` SET `emoji` = '{$count}' WHERE `emoji`.`id` = 103");
 
-}} else {
+}
+if ($response == "rh"){
+  $conn->query("UPDATE `emoji` SET `emoji` = '0' WHERE `emoji`.`id` = 1;");
+  exit;
+}
+if ($response == "rs"){
+  $conn->query("UPDATE `emoji` SET `emoji` = '0' WHERE `emoji`.`id` = 2;");
+  exit;
+}
+if ($response == "rd"){
+  $conn->query("UPDATE `emoji` SET `emoji` = '0' WHERE `emoji`.`id` = 3;");
+  exit;
+}
+if ($response == "rc"){
+  $conn->query("UPDATE `emoji` SET `emoji` = '0' WHERE `emoji`.`id` = 4;");
+  exit;
+}
+if ($response == "reng"){
+  $conn->query("UPDATE `emoji` SET `emoji` = '0' WHERE `emoji`.`id` = 101;");
+  exit;
+}
+if ($response == "rmafs"){
+  $conn->query("UPDATE `emoji` SET `emoji` = '0' WHERE `emoji`.`id` = 102;");
+  exit;
+}
+if ($response == "rdoge"){
+  $conn->query("UPDATE `emoji` SET `emoji` = '0' WHERE `emoji`.`id` = 103;");
   exit;
 }
 
 
+
+} else {
+  exit;
+}
+
+*/
 
 
  ?>
