@@ -22,8 +22,33 @@
 	This page is not here.
 	</i>
 </p>
-  <center><a class="btn btn-primary text-center" type="button" href="https://mathsreact.online">I Have calmed down</a></center>
+  <center><a class="btn btn-primary text-center" type="button" id="btn" href="https://mathsreact.online"><span id="count"></span> I Have calmed down</a></center>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
 </html>
+
+<script>
+
+  // Get refreence to span and button
+  var spn = document.getElementById("count");
+  var btn = document.getElementById("btn");
+
+  var count = 5;     // Set count
+  var timer = null;  // For referencing the timer
+
+  (function countDown(){
+    // Display counter and start counting down
+    spn.textContent = count;
+
+    // Run the function again every second if the count is not zero
+    if(count !== 0){
+      timer = setTimeout(countDown, 1000);
+      count--; // decrease the timer
+    } else {
+      // Enable the button
+      btn.removeAttribute("disabled");
+    }
+  }());
+
+</script>
