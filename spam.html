@@ -14,12 +14,8 @@
     <h1 style="color: rgb(255,255,255);text-align: center;margin-top: 3vh;"><i class="fa fa-warning" style="font-size: 20vh;"></i></h1>
     <h1 style="color: rgb(255,255,255);text-align: center;">Spam:</h1>
 
-	<p style="color: rgb(255,255,255);text-align: center;"><i>
-	You step in the stream,
-	<br/>
-	but the water has moved on.
-	<br/>
-	This page is not here.
+	<p id="haiku" style="color: rgb(255,255,255);text-align: center;"><i>
+
 	</i>
 </p>
   <center><button onclick="window.location.href='https://mathsreact.online'" class="btn btn-primary text-center" disabled type="button" id="btn"><span id="count"></span></button></center>
@@ -29,6 +25,16 @@
 </html>
 
 <script>
+var possibleMessages=[
+"You step in the stream, \n but the water has moved on. \n This page is not here.",
+"Out of memory. \n We wish to hold the whole sky, \n But we never will.",
+"The Web site you seek \n cannot be located but \n endless more exist.",
+"Error messages \n cannot completely convey. \n We now know shared loss.",
+"Chaos reigns within. \n Reflect, repent, and reboot. \n Order shall return.",
+"ABORTED effort: \n Close all that you have. \n You ask way too much."
+]
+var item = possibleMessages[Math.floor(Math.random() * possibleMessages.length)];
+document.getElementById("haiku").textContent=item
 
   // Get refreence to span and button
   var spn = document.getElementById("count");
