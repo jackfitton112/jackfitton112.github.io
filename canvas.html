@@ -33,7 +33,7 @@ var dict = [
   ["\u{1F622}", "#0000ff"],//\u{1F622}", //sad
   ["\u{1F633}", "#646464", newImage("depressedWojakTransparency.gif"), [40, 40]],//\u{1F633}", //depressed
   ["\u{1F610}", "#ff0000"],//\u{1F610}" //confused
-  ["\u{1F54A}", "#FF00E1",,[40,40]],//\U{1F54A}" //Preach
+  ["preach", "#FF00E1",newImage("preach.png"),[50,50]],// preach meme
   ["enjineer", "#000000", newImage("enjiner.png"), [100, 100], "enjineer moment"], //enjineer meme
   ["mafs", "#000000", newImage("mafs.png"), [100, 100], "mafs moment"],//mafs meme
   ["Doge", "#000000", newImage("doge.png"), [100, 100]]//doge meme
@@ -49,17 +49,15 @@ const data = {
   'Sad',
   'Depressed',
 	'Confused',
-  'Preach'
   ],
   datasets: [{
     label: 'Emotions',
-    data: [0, 0, 0, 0, 0],
+    data: [0, 0, 0, 0],
     backgroundColor: [
       dict["0"][1],
       dict["1"][1],
 	    dict["2"][1],
-      dict["3"][1],
-      dict["4"][1]
+      dict["3"][1]
     ],
     hoverOffset: 4
   }]
@@ -96,7 +94,7 @@ function del(){
   var ctx = c.getContext('2d');
   var canv = document.getElementById("myCanvas");
   ctx.clearRect(0, 0, canv.width, canv.height);
-  data.datasets[0].data=[0, 0, 0, 0, 0]
+  data.datasets[0].data=[0, 0, 0, 0]
   myChart.update()
 }
 /* HELPERS */
