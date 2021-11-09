@@ -34,6 +34,7 @@ var dict = [
   ["\u{1F633}", "#646464", newImage("assets/depressedWojakTransparency.gif"), [40, 40]],//\u{1F633}", //depressed
   ["\u{1F610}", "#ff0000"],//\u{1F610}" //confused
   ["preach", "#FF00E1",newImage("assets/preach.png"),[50,40],"Preach!"],// preach meme
+  ["\u{1F496}", "#ffffff"],
   ["enjineer", "#000000", newImage("assets/enjiner.png"), [100, 100], "enjineer moment"], //enjineer meme
   ["mafs", "#000000", newImage("assets/mafs.png"), [100, 100], "mafs moment"],//mafs meme
   ["Doge", "#000000", newImage("assets/doge.png"), [100, 100]]//doge meme
@@ -145,7 +146,7 @@ function newImage(src){
 						let tmpy=getRndInteger(0, c.height-dict[index][3][1])
 						ctx.drawImage(dict[index][2], tmpx, tmpy, dict[index][3][0], dict[index][3][1])
 						if (dict[index].length>4) {
-						M.toast({html: dict[index][4], displayLength: 1500})
+						M.toast({html: dict[index][4], displayLength: 750})
 						}
 					} else {
   						ctx.fillText(dict[index][0], getRndInteger(15, c.width-30), getRndInteger(15, c.height-15)) //30 being the font size, we dont want the unicode intersecting with edge
