@@ -34,6 +34,7 @@ var dict = [
   ["\u{1F633}", "#646464", newImage("assets/depressedWojakTransparency.gif"), [40, 40]],//\u{1F633}", //depressed
   ["\u{1F610}", "#ff0000"],//\u{1F610}" //confused
   ["preach", "#FF00E1",newImage("assets/preach.png"),[50,40],"Preach!"],// preach meme
+  ["\u{1F496}", "#ffffff"],
   ["enjineer", "#000000", newImage("assets/enjiner.png"), [100, 100], "enjineer moment"], //enjineer meme
   ["mafs", "#000000", newImage("assets/mafs.png"), [100, 100], "mafs moment"],//mafs meme
   ["Doge", "#000000", newImage("assets/doge.png"), [100, 100]]//doge meme
@@ -48,16 +49,18 @@ const data = {
   'Happy',
   'Sad',
   'Depressed',
-	'Confused',
+  'Confused',
+  'Preach'
   ],
   datasets: [{
     label: 'Emotions',
-    data: [0, 0, 0, 0],
+    data: [0, 0, 0, 0, 0],
     backgroundColor: [
       dict["0"][1],
       dict["1"][1],
-	    dict["2"][1],
-      dict["3"][1]
+	  dict["2"][1],
+      dict["3"][1],
+	  dict["4"][1]
     ],
     hoverOffset: 4
   }]
@@ -88,13 +91,13 @@ function resizeCanvas() {
     canv.height = leastwidth*0.45;
 }
 function del(){
-  prev=[0, 0, 0, 0]
+  prev=[0, 0, 0, 0, 0]
   fetch("https://message.cadetconcrete.co.uk/inc/maths/send.php?id=delete")
   var c = document.getElementById("myCanvas");
   var ctx = c.getContext('2d');
   var canv = document.getElementById("myCanvas");
   ctx.clearRect(0, 0, canv.width, canv.height);
-  data.datasets[0].data=[0, 0, 0, 0]
+  data.datasets[0].data=[0, 0, 0, 0, 0]
   myChart.update()
 }
 /* HELPERS */
@@ -143,7 +146,7 @@ function newImage(src){
 						let tmpy=getRndInteger(0, c.height-dict[index][3][1])
 						ctx.drawImage(dict[index][2], tmpx, tmpy, dict[index][3][0], dict[index][3][1])
 						if (dict[index].length>4) {
-						M.toast({html: dict[index][4], displayLength: 1500})
+						M.toast({html: dict[index][4], displayLength: 750})
 						}
 					} else {
   						ctx.fillText(dict[index][0], getRndInteger(15, c.width-30), getRndInteger(15, c.height-15)) //30 being the font size, we dont want the unicode intersecting with edge
@@ -161,7 +164,7 @@ function newImage(src){
 				prev=Array(diffElements).fill(0);
 			}
 		})
-		data.datasets[0].data=prev.slice(0, 4)
+		data.datasets[0].data=prev.slice(0, 5)
 		myChart.update()
       } else {
         console.log(httpRequest.status);
