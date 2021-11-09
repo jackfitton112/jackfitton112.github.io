@@ -9,6 +9,9 @@ $token = $_GET['token'];
 
 $check = md5(date("H:m"));
 
+echo $token;
+echo $check;
+
 if ($token == $check){
 
 if ($response == "delete"){
