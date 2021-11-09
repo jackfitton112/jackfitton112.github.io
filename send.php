@@ -7,17 +7,11 @@ header("Access-Control-Allow-Headers: *");
 $response = $_GET['id'];
 $token = $_GET['token'];
 
-$check = md5(date("H:m"));
+$check = md5(gmdate("H:i"));
 
-echo $token;
-echo $check;
-
-if ($token == $check){
-
-if ($response == "delete"){
-  $conn->query("UPDATE `emoji` SET `emoji` = '0' WHERE 1");
-  exit;
-}
+//echo $token;
+//echo $check;
+echo gmdate("H:i");
 
 if ($response == "rh"){
   $conn->query("UPDATE `emoji` SET `emoji` = '0' WHERE `emoji`.`id` = 1;");
@@ -47,6 +41,14 @@ if ($response == "rdoge"){
   $conn->query("UPDATE `emoji` SET `emoji` = '0' WHERE `emoji`.`id` = 103;");
   exit;
 }
+
+if ($token == $check || $response == "delete"){
+
+if ($response == "delete"){
+  $conn->query("UPDATE `emoji` SET `emoji` = '0' WHERE 1");
+  exit;
+}
+
 
 
 if ($response == "h"){
