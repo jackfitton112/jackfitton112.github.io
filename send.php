@@ -13,13 +13,6 @@ $check = md5(gmdate("H:i"));
 //echo $check;
 echo gmdate("H:i");
 
-if ($token == $check || $response == "delete"){
-
-if ($response == "delete"){
-  $conn->query("UPDATE `emoji` SET `emoji` = '0' WHERE 1");
-  exit;
-}
-
 if ($response == "rh"){
   $conn->query("UPDATE `emoji` SET `emoji` = '0' WHERE `emoji`.`id` = 1;");
   exit;
@@ -48,6 +41,14 @@ if ($response == "rdoge"){
   $conn->query("UPDATE `emoji` SET `emoji` = '0' WHERE `emoji`.`id` = 103;");
   exit;
 }
+
+if ($token == $check || $response == "delete"){
+
+if ($response == "delete"){
+  $conn->query("UPDATE `emoji` SET `emoji` = '0' WHERE 1");
+  exit;
+}
+
 
 
 if ($response == "h"){
