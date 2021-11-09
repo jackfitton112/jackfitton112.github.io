@@ -48,16 +48,18 @@ const data = {
   'Happy',
   'Sad',
   'Depressed',
-	'Confused',
+  'Confused',
+  'Preach'
   ],
   datasets: [{
     label: 'Emotions',
-    data: [0, 0, 0, 0],
+    data: [0, 0, 0, 0, 0],
     backgroundColor: [
       dict["0"][1],
       dict["1"][1],
-	    dict["2"][1],
-      dict["3"][1]
+	  dict["2"][1],
+      dict["3"][1],
+	  dict["4"][1]
     ],
     hoverOffset: 4
   }]
@@ -88,13 +90,13 @@ function resizeCanvas() {
     canv.height = leastwidth*0.45;
 }
 function del(){
-  prev=[0, 0, 0, 0]
+  prev=[0, 0, 0, 0, 0]
   fetch("https://message.cadetconcrete.co.uk/inc/maths/send.php?id=delete")
   var c = document.getElementById("myCanvas");
   var ctx = c.getContext('2d');
   var canv = document.getElementById("myCanvas");
   ctx.clearRect(0, 0, canv.width, canv.height);
-  data.datasets[0].data=[0, 0, 0, 0]
+  data.datasets[0].data=[0, 0, 0, 0, 0]
   myChart.update()
 }
 /* HELPERS */
@@ -161,7 +163,7 @@ function newImage(src){
 				prev=Array(diffElements).fill(0);
 			}
 		})
-		data.datasets[0].data=prev.slice(0, 4)
+		data.datasets[0].data=prev.slice(0, 5)
 		myChart.update()
       } else {
         console.log(httpRequest.status);
