@@ -40,7 +40,7 @@ function buttonEvent(id) {
 		fetch("https://message.cadetconcrete.co.uk/inc/maths/send.php?id="+id)
 		c+=1
 	} else {
-		window.location.href = "404.html";
+		alert("Too many requests, We know its exciting but you need to slow down!");
 	}
 }
 var c=0
