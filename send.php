@@ -20,10 +20,10 @@ $array = array (
   102 => "mafs",
   103 => "doge"
 
-)
+);
 
-$key = array_search($response, $array);
-$pos = strpos($response, "r");
+
+
 
 // Functions
 function insertdata ($key){
@@ -37,12 +37,43 @@ function insertdata ($key){
 
 }
 
+function deletedata ($key){
 
+  include "db.php";
+  $conn->query("UPDATE `emoji` SET `emoji` = '0' WHERE `emoji`.`id` = {$key};");
+  exit;
+
+}
+
+
+
+$pos = strpos($response, "r");
+$key = array_search($response, $array);
+
+
+
+
+//checks
+
+if ($pos == true || $response !== "delete"){
+  if($check == $token || $dev == 1){
+    $response = trim($response, "r");
+    $key = array_search($response, $array);
+    deletedata($key);
+  }
+}
 if ($pos == false && $response !== "delete"){
   if($check == $token || $dev == 1){
     insertdata($key);
   }
 }
+
+if ($response == "delete"){
+    $conn->query("UPDATE `emoji` SET `emoji` = '0' WHERE 1");
+    exit;
+}
+
+
 
 
 
