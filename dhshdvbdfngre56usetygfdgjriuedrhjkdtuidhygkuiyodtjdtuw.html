@@ -4,39 +4,52 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Dev Site</title>
+    <title>Untitled3</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
-<body style="background: #171717;">
-    <h1 style="text-align: center;color: rgb(255,255,255);">Maths React Dev Site</h1>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-              <button onclick="send('h')" class="btn btn-success" type="button" style="width: 100%;height: 7vh;">Happy</button>
-              <button onclick="send('s')" class="btn btn-primary" type="button" style="width: 100%;height: 7vh;margin-top: 1vh;">Sad</button>
-              <button onclick="send('d')" class="btn btn-secondary" type="button" style="width: 100%;height: 7vh;margin-top: 1vh;">Depressed</button>
-              <button onclick="send('c')" class="btn btn-danger" type="button" style="width: 100%;height: 7vh;margin-top: 1vh;">Confused</button>
-              <button onclick="send('p')" class="btn btn-danger" type="button" style="width: 100%;height: 7vh;margin-top: 1vh;background: linear-gradient(204deg, rgba(2,0,36,1) 0%, rgba(243,0,255,0.22202384371717432) 0%, rgba(0,212,255,1) 100%);">Preach</button>
-              <button onclick="send('l')" class="btn btn-danger" type="button" style="width: 100%;height: 7vh;margin-top: 1vh;background: red;">Love</button>
-              <button onclick="send('eng')" class="btn btn-primary" type="button" style="width: 100%;height: 7vh;margin-top: 1vh;background: linear-gradient(-145deg, rgb(255,0,0) 0%, rgb(0,25,255) 98%), rgb(13, 110, 253);">Enjiner</button>
-              <button onclick="send('mafs')" class="btn btn-primary" type="button" style="width: 100%;height: 7vh;margin-top: 1vh;background: linear-gradient(-126deg, rgb(255,0,184), rgba(255,234,122,0.44) 100%);">Mafs</button>
-              <button onclick="send('doge')" class="btn btn-primary" type="button" style="width: 100%;height: 7vh;margin-top: 1vh;background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,94,121,0.4433123591233369) 35%, rgba(0,212,255,1) 100%);">Doge</button>
+<body style="background: rgb(23,23,23);">
+    <h1 class="text-center" style="border-color: rgb(33, 37, 41);border-top-color: rgb(33,;border-right-color: 37,;border-bottom-color: 41);border-left-color: 37,;color: rgb(255,255,255);">Maths React Dev Site</h1>
+    <div><a class="btn btn-primary" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapse-1" href="#collapse-1" role="button" style="width: 60%;margin-right: 20%;margin-left: 20%;margin-top: 2vh;"><i class="fas fa-arrow-alt-circle-down"></i>&nbsp;React Buttons&nbsp;</a>
+        <div class="collapse" id="collapse-1">
+          <div style="width:70%; margin-left:15%;margin-right:15%;">
+            <button onclick="send('h')" class="btn btn-success" type="button" style="width: 100%;height: 7vh;margin-top: 1vh;">Happy</button>
+            <button onclick="send('s')" class="btn btn-primary" type="button" style="width: 100%;height: 7vh;margin-top: 1vh;">Sad</button>
+            <button onclick="send('d')" class="btn btn-secondary" type="button" style="width: 100%;height: 7vh;margin-top: 1vh;">Depressed</button>
+            <button onclick="send('c')" class="btn btn-danger" type="button" style="width: 100%;height: 7vh;margin-top: 1vh;">Confused</button>
+            <button onclick="send('p')" class="btn btn-danger" type="button" style="width: 100%;height: 7vh;margin-top: 1vh;background: linear-gradient(204deg, rgba(2,0,36,1) 0%, rgba(243,0,255,0.22202384371717432) 0%, rgba(0,212,255,1) 100%);">Preach</button>
+            <button onclick="send('l')" class="btn btn-danger" type="button" style="width: 100%;height: 7vh;margin-top: 1vh;background: red;">Love</button>
+            <button onclick="send('eng')" class="btn btn-primary" type="button" style="width: 100%;height: 7vh;margin-top: 1vh;background: linear-gradient(-145deg, rgb(255,0,0) 0%, rgb(0,25,255) 98%), rgb(13, 110, 253);">Enjiner</button>
+            <button onclick="send('mafs')" class="btn btn-primary" type="button" style="width: 100%;height: 7vh;margin-top: 1vh;background: linear-gradient(-126deg, rgb(255,0,184), rgba(255,234,122,0.44) 100%);">Mafs</button>
+            <button onclick="send('doge')" class="btn btn-primary" type="button" style="width: 100%;height: 7vh;margin-top: 1vh;background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,94,121,0.4433123591233369) 35%, rgba(0,212,255,1) 100%);">Doge</button>
+          </div>
+        </div>
+        </div>
+    </div>
+    <div><a class="btn btn-primary" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapse-2" href="#collapse-2" role="button" style="width: 60%;margin-right: 20%;margin-left: 20%;margin-top: 2vh;"><i class="fas fa-arrow-alt-circle-down"></i>&nbsp;Reset Buttons</a>
+        <div class="collapse" id="collapse-2">
+          <div class="row">
+            <div style="width:70%; margin-left:15%;margin-right:15%;">
+              <button onclick="send('rh')" class="btn btn-success" type="button" style="width: 100%;height: 7vh;margin-top: 1vh;">Happy</button>
+              <button onclick="send('rs')" class="btn btn-primary" type="button" style="width: 100%;height: 7vh;margin-top: 1vh;">Sad</button>
+              <button onclick="send('rd')" class="btn btn-secondary" type="button" style="width: 100%;height: 7vh;margin-top: 1vh;">Depressed</button>
+              <button onclick="send('rc')" class="btn btn-danger" type="button" style="width: 100%;height: 7vh;margin-top: 1vh;">Confused</button>
+              <button onclick="send('rp')" class="btn btn-danger" type="button" style="width: 100%;height: 7vh;margin-top: 1vh;background: linear-gradient(204deg, rgba(2,0,36,1) 0%, rgba(243,0,255,0.22202384371717432) 0%, rgba(0,212,255,1) 100%);">Preach</button>
+              <button onclick="send('rl')" class="btn btn-danger" type="button" style="width: 100%;height: 7vh;margin-top: 1vh;background: red;">Love</button>
+              <button onclick="send('reng')" class="btn btn-primary" type="button" style="width: 100%;height: 7vh;margin-top: 1vh;background: linear-gradient(-145deg, rgb(255,0,0) 0%, rgb(0,25,255) 98%), rgb(13, 110, 253);">Enjiner</button>
+              <button onclick="send('rmafs')" class="btn btn-primary" type="button" style="width: 100%;height: 7vh;margin-top: 1vh;background: linear-gradient(-126deg, rgb(255,0,184), rgba(255,234,122,0.44) 100%);">Mafs</button>
+              <button onclick="send('rdoge')" class="btn btn-primary" type="button" style="width: 100%;height: 7vh;margin-top: 1vh;background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,94,121,0.4433123591233369) 35%, rgba(0,212,255,1) 100%);">Doge</button>
             </div>
-            <div class="col-md-6">
-              <button onclick="send('rh')" class="btn btn-success" type="button" style="width: 100%;height: 7vh;">&nbsp;Reset Happy</button>
-              <button onclick="send('rs')" class="btn btn-primary" type="button" style="width: 100%;height: 7vh;margin-top: 1vh;">Reset Sad</button>
-              <button onclick="send('rd')" class="btn btn-secondary" type="button" style="width: 100%;height: 7vh;margin-top: 1vh;">Reset Depressed</button>
-              <button onclick="send('rc')" class="btn btn-danger" type="button" style="width: 100%;height: 7vh;margin-top: 1vh;">Reset Confused</button>
-              <button onclick="send('rp')" class="btn btn-danger" type="button" style="width: 100%;height: 7vh;margin-top: 1vh;background: linear-gradient(204deg, rgba(2,0,36,1) 0%, rgba(243,0,255,0.22202384371717432) 0%, rgba(0,212,255,1) 100%);">Reset Preach</button>
-              <button onclick="send('rl')" class="btn btn-danger" type="button" style="width: 100%;height: 7vh;margin-top: 1vh;">Reset Love</button>
-              <button onclick="send('reng')" class="btn btn-primary" type="button" style="width: 100%;height: 7vh;margin-top: 1vh;background: linear-gradient(-145deg, rgb(255,0,0) 0%, rgb(0,25,255) 98%), rgb(13, 110, 253);">Reset Enjiner</button>
-              <button onclick="send('rmafs')" class="btn btn-primary" type="button" style="width: 100%;height: 7vh;margin-top: 1vh;background: linear-gradient(-126deg, rgb(255,0,184), rgba(255,234,122,0.44) 100%);">Reset Mafs</button>
-              <button onclick="send('rdoge')" class="btn btn-primary" type="button" style="width: 100%;height: 7vh;margin-top: 1vh;background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,94,121,0.4433123591233369) 35%, rgba(0,212,255,1) 100%);">Reset Doge</button>
-            </div>
+          </div>
 
-            <button onclick="send('delete')" class="btn btn-primary" type="button" style="width: 100%;height: 7vh;margin-top: 1vh;">Reset All</button>
+        </div>
+    </div>
+    <div><a class="btn btn-primary" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapse-3" href="#collapse-3" role="button" style="width: 60%;margin-right: 20%;margin-left: 20%;margin-top: 2vh;"><i class="fas fa-arrow-alt-circle-down"></i>&nbsp;Site Tools</a>
+        <div class="collapse" id="collapse-3">
         </div>
     </div>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>

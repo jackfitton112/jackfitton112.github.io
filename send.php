@@ -65,8 +65,6 @@ function deletedata ($key){
 
 
 // Checks response and calls correct function
-if ($token == $check || $dev === "1"){
-
 
     if (strpos($response, "r") !== false){
         $key = array_search($response, $delarray);
@@ -76,6 +74,5 @@ if ($token == $check || $dev === "1"){
         $key = array_search($response, $array);
         insertdata($key);
       }
-}
 
 ?>
