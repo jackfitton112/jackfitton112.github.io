@@ -1,4 +1,3 @@
-<!-- GIT BRANCH TEST-->
 <html>
 
 <head>
@@ -28,7 +27,83 @@
 <script type="text/javascript">
 /* CONFIG STUFFS */
 // index of returned array : [fallback unicode/text, chart colour, image if set, image scaling [x, y], toast comment]
-var dict = [
+// improved: {"id":{"txt":"unicode fallback", "color":"#aabbcc", "graph:true", "gname":"Happy", "amount":0}, etc}
+var emotionData = {
+	"h":{
+		"txt":"\u{1F60A}",
+		"color":"#00ff00",
+		"gname":"Happy",
+		"graph":true,
+		"num":0
+	},
+	"s":{
+		"txt":"\u{1F622}",
+		"color":"#0000ff",
+		"gname":"Sad",
+		"graph":true,
+		"num":0
+	},
+	"d":{
+		"txt":"\u{1F633}",
+		"color":"#646464",
+		"gname":"Depressed",
+		"graph":true,
+		"num":0
+	},
+	"c":{
+		"txt":"\u{1F610}",
+		"color":"#ff0000",
+		"gname":"Confused",
+		"graph":true,
+		"num":0
+	},
+	"p":{
+		"txt":"preach",
+		"color":"#ff00e1",
+		"gname":"Preach!",
+		"graph":true,
+		"num":0
+	},
+	"l":{
+		"txt":"\u{1F496}",
+		"color":"#ffffff",
+		"gname":"\u{1F496}",
+		"graph":true,
+		"num":0
+	},
+	"eng":{
+		"txt":"enjineer",
+		"color":"#000000",
+		"gname":"",
+		"graph":false,
+		"img":newImage("assets/enjineer.png"),
+		"scale":{"h":100,"w":100},
+		"toast":"enjineer moment",
+		"num":0
+	},
+	"mafs":{
+		"txt":"mafs",
+		"color":"#000000",
+		"gname":"",
+		"graph":false,
+		"img":newImage("assets/mafs.png"),
+		"scale":{"h":100, "w":100},
+		"toast":"mafs moment",
+		"num":0
+	},
+	"doge":{
+		"txt":"doge",
+		"color":"#000000",
+		"gname":"",
+		"graph":false,
+		"img":newImage("assets/doge.png"),
+		"scale":{"h":100, "w":100},
+		"toast":"bork",
+		"num":0
+	}
+}
+
+/*
   ["\u{1F60A}", "#00ff00"], //\u{1F60A}", //happy
   ["\u{1F622}", "#0000ff"],//\u{1F622}", //sad
   ["\u{1F633}", "#646464", newImage("assets/depressedWojakTransparency.gif"), [40, 40]],//\u{1F633}", //depressed
@@ -38,30 +113,18 @@ var dict = [
   ["enjineer", "#000000", newImage("assets/enjiner.png"), [100, 100], "enjineer moment"], //enjineer meme
   ["mafs", "#000000", newImage("assets/mafs.png"), [100, 100], "mafs moment"],//mafs meme
   ["Doge", "#000000", newImage("assets/doge.png"), [100, 100]]//doge meme
-]
-
+]}
 var diffElements=dict.length
-var prev = Array(diffElements).fill(0);
+var prev = Array(diffElements).fill(0);*/
 
 /* Chart.js configs */
+
 const data = {
-  labels: [
-  'Happy',
-  'Sad',
-  'Depressed',
-  'Confused',
-  'Preach'
-  ],
+  labels: getAllAttributes(emotionData, "gname"),
   datasets: [{
     label: 'Emotions',
-    data: [0, 0, 0, 0, 0],
-    backgroundColor: [
-      dict["0"][1],
-      dict["1"][1],
-	  dict["2"][1],
-      dict["3"][1],
-	  dict["4"][1]
-    ],
+    data: getAllAttributes(emotionData, "num"),
+    backgroundColor: getAllAttributes(emotionData, "color"),
     hoverOffset: 4
   }]
 };
@@ -70,9 +133,7 @@ const config = {
   type: 'doughnut',
   data: data,
   options :{
-
   }
-
 };
 
 const myChart = new Chart( //render chart
@@ -90,8 +151,19 @@ function resizeCanvas() {
     canv.width = leastwidth*0.45;
     canv.height = leastwidth*0.45;
 }
+
+function getChartItemAttributes(obj, path) {
+  let output= []
+  Object.keys(obj).forEach(function (item) {
+    if (item.graph) {
+      output.push(item[path]);
+    }
+  })
+  return output;
+}
 function del(){
-  prev=[0, 0, 0, 0, 0]
+  //prev=[0, 0, 0, 0, 0]
+  Object.keys(emotionData).forEach(function (item) {emotionData[item]["num"]=0})
   fetch("https://message.cadetconcrete.co.uk/inc/maths/send.php?id=delete")
   var c = document.getElementById("myCanvas");
   var ctx = c.getContext('2d');
