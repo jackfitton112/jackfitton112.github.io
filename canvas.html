@@ -199,13 +199,35 @@ function renderJSON(jsonString) {
       if (times > 0) {//new item added
         emotionData[respItem].num=response[respItem].num
         for (let step=0; step < times; step++) {
-          ctx.fillStyle = emotionData[respItem].colour
-          if (emotionData[respItem]) {
+          //if supposed to draw unicode
+          if (emotionData[respItem].img === undefined) {
+            ctx.fillStyle = emotionData[respItem].colour
+            ctx.fillText(emotionData[respItem].txt, getRndInteger(15, c.width-30), getRndInteger(15, c.height-15)) //30 being the font size, we dont want the unicode intersecting with edge
+          } else {
+          //if supposed to do Image
+            let tmpx=getRndInteger(0, c.width-emotionData[respItem].scale.w)
+            let tmpy=getRndInteger(0, c.height-emotionData[respItem].scale.h)
+            ctx.drawImage(emotionData[respItem].img, tmpx, tmpy, emotionData[respItem].scale.w, emotionData[respItem].scale.h)
           }
+          //if toast
+          if (emotionData[respItem].hasOwnProperty("toast")) {
+            M.toast({html: emotionData[respItem].toast, displayLength: 750})
+          }
+          //dim all things on canvas by a little
+          ctx.globalCompositeOperation='source-atop';
+					ctx.fillStyle = 'rgba(254,255,255,0.1)';
+					ctx.fillRect(0, 0, c.width, c.height);
+					ctx.globalCompositeOperation='source-over';
         }
+      }
+      if (times < 0) {//item got removed
+
       }
     }
   })
+  //add to chart data and update chart
+  data.datasets[0].data=listAttributes(emotionData, 'num', true)
+  myChart.update()
 }
 /*
 
