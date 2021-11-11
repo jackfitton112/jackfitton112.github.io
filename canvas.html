@@ -200,7 +200,6 @@ function renderJSON(jsonString) {
     if (emotionData[respItem]) {//check if item exists in emotionData
       let times = response[respItem].num - emotionData[respItem].num
       if (times > 0) {//new item added
-        emotionData[respItem].num=response[respItem].num
         for (let step=0; step < times; step++) {
           //if supposed to draw unicode
           if (emotionData[respItem].img === "" || emotionData[respItem].img === undefined) {
@@ -224,8 +223,10 @@ function renderJSON(jsonString) {
         }
       }
       if (times < 0) {//item got removed
-
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, c.width, c.height)
       }
+      emotionData[respItem].num=response[respItem].num //done updating, set emotionData.num to newest
     }
   })
   //add to chart data and update chart
