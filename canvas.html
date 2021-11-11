@@ -202,7 +202,7 @@ function renderJSON(jsonString) {
             ctx.drawImage(emotionData[respItem].img, tmpx, tmpy, emotionData[respItem].scale.w, emotionData[respItem].scale.h)
           }
           //if toast
-          if (!(emotionData[respItem].toast === undefined)) {
+          if (!(emotionData[respItem].toast === undefined) && !(redrawAll)) {
             M.toast({html: emotionData[respItem].toast, displayLength: 750})
           }
           //dim all things on canvas by a little
