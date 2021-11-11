@@ -18,7 +18,7 @@
 
 
 <p id="log" style=""></p>
-<button onclick="del()" type="button" disabled style="position: fixed; right:5px; bottom:5px" class="waves-effect waves-light btn"><i class="material-icons left">delete</i>Reset Canvas</button>
+<button onclick="del()" type="button" style="position: fixed; right:5px; bottom:5px" class="waves-effect waves-light btn"><i class="material-icons left">delete</i>Reset Canvas</button>
 
 
 
@@ -62,13 +62,16 @@ var emotionData = {
 		"color":"#ff00e1",
 		"gname":"Preach!",
 		"graph":true,
+    "img":newImage("assets/preach.png"),
+    "scale":{"h":100, "w":100},
+    "toast":"preach",
 		"num":0
 	},
 	"l":{
 		"txt":"\u{1F496}",
 		"color":"#ffffff",
 		"gname":"\u{1F496}",
-		"graph":true,
+		"graph":false,
 		"num":0
 	},
 	"eng":{
@@ -76,7 +79,7 @@ var emotionData = {
 		"color":"#000000",
 		"gname":"",
 		"graph":false,
-		"img":newImage("assets/enjineer.png"),
+		"img":newImage("assets/enjiner.png"),
 		"scale":{"h":100,"w":100},
 		"toast":"enjineer moment",
 		"num":0
@@ -184,7 +187,7 @@ function newImage(src){
 //TODO: rewrite ALL of the receive thing to work async
 function doUpdate() {
   let time = Date.now()
-  fetch("https://message.cadetconcrete.co.uk/inc/maths/receive.php?test=1&time="+time).then(x => x.text()).then(renderJSON).catch(error => {console.error("rip: ", error)})
+  fetch("https://message.cadetconcrete.co.uk/inc/maths/receive.php?update=1&time="+time).then(x => x.text()).then(renderJSON).catch(error => {console.error("rip: ", error)})
 }
 function renderJSON(jsonString) {
   //setup canvas
@@ -200,8 +203,8 @@ function renderJSON(jsonString) {
         emotionData[respItem].num=response[respItem].num
         for (let step=0; step < times; step++) {
           //if supposed to draw unicode
-          if (emotionData[respItem].img === undefined) {
-            ctx.fillStyle = emotionData[respItem].colour
+          if (emotionData[respItem].img === "" || emotionData[respItem].img === undefined) {
+            ctx.fillStyle = emotionData[respItem].color
             ctx.fillText(emotionData[respItem].txt, getRndInteger(15, c.width-30), getRndInteger(15, c.height-15)) //30 being the font size, we dont want the unicode intersecting with edge
           } else {
           //if supposed to do Image
@@ -210,7 +213,7 @@ function renderJSON(jsonString) {
             ctx.drawImage(emotionData[respItem].img, tmpx, tmpy, emotionData[respItem].scale.w, emotionData[respItem].scale.h)
           }
           //if toast
-          if (emotionData[respItem].hasOwnProperty("toast")) {
+          if (!(emotionData[respItem].toast === undefined)) {
             M.toast({html: emotionData[respItem].toast, displayLength: 750})
           }
           //dim all things on canvas by a little
@@ -229,6 +232,8 @@ function renderJSON(jsonString) {
   data.datasets[0].data=listAttributes(emotionData, 'num', true)
   myChart.update()
 }
+
+setInterval(doUpdate, 1000)
 /*
 
 		Object(x.emotions).keys.forEach(function draw (value, index) {
