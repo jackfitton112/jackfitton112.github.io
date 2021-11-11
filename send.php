@@ -44,8 +44,9 @@ if ($response === "delete"){
 }
 
 
+
 //////////////////////////////////DEV////////////////////////////*
-/*
+
 function biuldArray(){
   include "db.php";
   $array = array ();
@@ -53,35 +54,12 @@ function biuldArray(){
   $results = $conn->query($sql);
   while ($row = $results->fetch_assoc()){
     $array += [$row['name'] => $row['id']];
+    $array += ["r".$row['name'] => $row['id']];
 
   }
   return $array;
 }
 
-
-fun
-
-
-$array = biuldArray();
-
-
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Functions
-
-//insert data to DB
 function insertdata ($key){
   include "db.php";
   $res = $conn->query("SELECT * FROM `emoji` WHERE `id` = {$key}");
@@ -98,15 +76,22 @@ function deletedata ($key){
 }
 
 
-//HOTFIX DELETED CHECKSUM
-// Checks response and calls correct function
 
-    if (strpos($response, "r") !== false){
-        $key = array_search($response, $delarray);
-        deletedata($key);
-      } else {
-        $key = array_search($response, $array);
-        insertdata($key);
-      }
+
+$array = biuldArray();
+
+if ($response != "delete"){
+
+if ($response[0] == "r"){
+  $key = $array["{$response}"];
+  deletedata($key);
+} else {
+  $key = $array["{$response}"];
+  insertdata($key);
+}
+
+}
+
+
 
 ?>
