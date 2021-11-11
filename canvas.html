@@ -26,8 +26,7 @@
 
 <script type="text/javascript">
 /* CONFIG STUFFS */
-// index of returned array : [fallback unicode/text, chart colour, image if set, image scaling [x, y], toast comment]
-// improved: {"id":{"txt":"unicode fallback", "color":"#aabbcc", "graph:true", "gname":"Happy", "amount":0}, etc}
+// data layout: {"id":{"txt":"unicode fallback", "color":"#aabbcc", "graph:true", "gname":"Happy", "amount":0}, etc}
 var emotionData = {
 	"h":{
 		"txt":"\u{1F60A}",
@@ -105,20 +104,6 @@ var emotionData = {
 		"num":0
 	}
 }
-
-/*
-  ["\u{1F60A}", "#00ff00"], //\u{1F60A}", //happy
-  ["\u{1F622}", "#0000ff"],//\u{1F622}", //sad
-  ["\u{1F633}", "#646464", newImage("assets/depressedWojakTransparency.gif"), [40, 40]],//\u{1F633}", //depressed
-  ["\u{1F610}", "#ff0000"],//\u{1F610}" //confused
-  ["preach", "#FF00E1",newImage("assets/preach.png"),[50,40],"Preach!"],// preach meme
-  ["\u{1F496}", "#ffffff"],
-  ["enjineer", "#000000", newImage("assets/enjiner.png"), [100, 100], "enjineer moment"], //enjineer meme
-  ["mafs", "#000000", newImage("assets/mafs.png"), [100, 100], "mafs moment"],//mafs meme
-  ["Doge", "#000000", newImage("assets/doge.png"), [100, 100]]//doge meme
-]}
-var diffElements=dict.length
-var prev = Array(diffElements).fill(0);*/
 
 /* Chart.js configs */
 
@@ -234,49 +219,8 @@ function renderJSON(jsonString) {
   myChart.update()
 }
 
-setInterval(doUpdate, 1000)
-/*
+setInterval(doUpdate, 100)
 
-		Object(x.emotions).keys.forEach(function draw (value, index) {
-			var times = value-prev[index]
-			if (times > 0) { // if new item got added
-				prev[index]=value
-				for (let step = 0; step < times; step++) {
-					ctx.fillStyle = dict[index][1]
-					if (dict[index].length>2) {//if image
-						let tmpx=getRndInteger(0, c.width-dict[index][3][0])
-						let tmpy=getRndInteger(0, c.height-dict[index][3][1])
-						ctx.drawImage(dict[index][2], tmpx, tmpy, dict[index][3][0], dict[index][3][1])
-						if (dict[index].length>4) { // if toast
-						M.toast({html: dict[index][4], displayLength: 750})
-						}
-					} else {//if text
-  						ctx.fillText(dict[index][0], getRndInteger(15, c.width-30), getRndInteger(15, c.height-15)) //30 being the font size, we dont want the unicode intersecting with edge
-					}
-					ctx.globalCompositeOperation='source-atop';
-					ctx.fillStyle = 'rgba(254,255,255,0.1)';
-					ctx.fillRect(0, 0, c.width, c.height);
-					ctx.globalCompositeOperation='source-over';
-				}
-
-			}
-			if (times < 0) {//if item got cleared
-				ctx.fillStyle = '#ffffff';
-				ctx.fillRect(0, 0, c.width, c.height)
-				prev=Array(diffElements).fill(0);
-			}
-		})
-		data.datasets[0].data=prev.slice(0, 5)
-		myChart.update()
-      } else {
-        console.log(httpRequest.status);
-      }
-    }
-  }
-
-  var t=setInterval(makeRequest,100);
-})();
-*/
 </script>
 </body>
 </html>
