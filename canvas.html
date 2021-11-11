@@ -47,6 +47,8 @@ var emotionData = {
 		"color":"#646464",
 		"gname":"Depressed",
 		"graph":true,
+    "img":newImage("assets/depressedWojakTransparency.gif"),
+    "scale":{"h":30, "w":30},
 		"num":0
 	},
 	"c":{
@@ -174,6 +176,7 @@ function doUpdate() {
   let time = Date.now()
   fetch("https://message.cadetconcrete.co.uk/inc/maths/receive.php?update=1&time="+time).then(x => x.text()).then(renderJSON).catch(error => {console.error("rip: ", error)})
 }
+var redrawAll = 0
 function renderJSON(jsonString) {
   //setup canvas
   var c = document.getElementById("myCanvas");
@@ -181,13 +184,15 @@ function renderJSON(jsonString) {
   ctx.font = "30px Arial";
   ctx.textAlign="center";
   let response = JSON.parse(jsonString)
+  if (redrawAll==1) {ctx.fillStyle = '#ffffff';ctx.fillRect(0, 0, c.width, c.height)} //clear canvas for redrawing. do this here instead of at if times < 0 to stop canvas being empty until next fetch
   Object.keys(response).forEach(function (respItem) {
     if (emotionData[respItem]) {//check if item exists in emotionData
       let times = response[respItem].num - emotionData[respItem].num
+      if (redrawAll==1) {times=response[respItem].num}
       if (times > 0) {//new item added
         for (let step=0; step < times; step++) {
           //if supposed to draw unicode
-          if (emotionData[respItem].img === "" || emotionData[respItem].img === undefined) {
+          if (emotionData[respItem].img === undefined) {
             ctx.fillStyle = emotionData[respItem].color
             ctx.fillText(emotionData[respItem].txt, getRndInteger(15, c.width-30), getRndInteger(15, c.height-15)) //30 being the font size, we dont want the unicode intersecting with edge
           } else {
@@ -207,19 +212,20 @@ function renderJSON(jsonString) {
 					ctx.globalCompositeOperation='source-over';
         }
       }
+
       if (times < 0) {//item got removed
-        ctx.fillStyle = '#ffffff';
-        ctx.fillRect(0, 0, c.width, c.height)
+        redrawAll=2 //schedule rerender of entire canvas; 2=(just set) 1=(got out of loop) 0=(gone through entire render again)
       }
       emotionData[respItem].num=response[respItem].num //done updating, set emotionData.num to newest
     }
   })
   //add to chart data and update chart
+  if (redrawAll>0){redrawAll-=1}//decrease redraw if bigger than 0, switches to next state (see item got removed bit)
   data.datasets[0].data=listAttributes(emotionData, 'num', true)
   myChart.update()
 }
 
-setInterval(doUpdate, 100)
+setInterval(doUpdate, 1000)
 
 </script>
 </body>
