@@ -1,6 +1,8 @@
 <?php
 
 include "db.php";
+//set utf8mb4 thing in for //
+
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: *");
 header("Access-Control-Expose-Headers: *");
@@ -13,11 +15,11 @@ $update = $_GET['update'];
 
 if ($config == 1){
       $send = array ();
-
+      $array = array();
       $result = $conn->query("SELECT * FROM `emoji` ORDER BY `emoji`.`id` ASC");
       while ($row = $result->fetch_assoc()){
 
-        $array[row['name']] = array(
+        $array[$row['name']] = array(
           "txt" => $row['txt'],
           "color" => $row['color'],
           "gname" => $row['gname'],
@@ -25,10 +27,10 @@ if ($config == 1){
           "scale" => ["w" => $row['scalew'], "h" => $row['scaleh']],
           "toast" => $row['toast'],
           "num" => $row['emoji']
-          );
+        );}
         echo json_encode($array,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
 
-      }
+
 
 
 }
