@@ -17,8 +17,7 @@ if ($config == 1){
       $result = $conn->query("SELECT * FROM `emoji` ORDER BY `emoji`.`id` ASC");
       while ($row = $result->fetch_assoc()){
 
-        $array = array($row['name'] =>
-        [
+        $array[row['name']] = array(
           "txt" => $row['txt'],
           "color" => $row['color'],
           "gname" => $row['gname'],
@@ -26,8 +25,7 @@ if ($config == 1){
           "scale" => ["w" => $row['scalew'], "h" => $row['scaleh']],
           "toast" => $row['toast'],
           "num" => $row['emoji']
-
-             ]  );
+          );
         echo json_encode($array);
 
       }
