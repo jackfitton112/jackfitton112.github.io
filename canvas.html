@@ -27,89 +27,10 @@
 <script type="text/javascript">
 /* CONFIG STUFFS */
 // data layout: {"id":{"txt":"unicode fallback", "color":"#aabbcc", "graph:true", "gname":"Happy", "amount":0}, etc}
-var emotionData = {
-	"h":{
-		"txt":"\u{1F60A}",
-		"color":"#00ff00",
-		"gname":"Happy",
-		"graph":true,
-		"num":0
-	},
-	"s":{
-		"txt":"\u{1F622}",
-		"color":"#0000ff",
-		"gname":"Sad",
-		"graph":true,
-		"num":0
-	},
-	"d":{
-		"txt":"\u{1F633}",
-		"color":"#646464",
-		"gname":"Depressed",
-		"graph":true,
-    "img":newImage("assets/depressedWojakTransparency.gif"),
-    "scale":{"h":30, "w":30},
-		"num":0
-	},
-	"c":{
-		"txt":"\u{1F610}",
-		"color":"#ff0000",
-		"gname":"Confused",
-		"graph":true,
-		"num":0
-	},
-	"p":{
-		"txt":"preach",
-		"color":"#ff00e1",
-		"gname":"Preach!",
-		"graph":true,
-    "img":newImage("assets/preach.png"),
-    "scale":{"h":100, "w":100},
-    "toast":"preach",
-		"num":0
-	},
-	"l":{
-		"txt":"\u{1F496}",
-		"color":"#ffffff",
-		"gname":"\u{1F496}",
-		"graph":false,
-		"num":0
-	},
-	"eng":{
-		"txt":"enjineer",
-		"color":"#000000",
-		"gname":"",
-		"graph":false,
-		"img":newImage("assets/enjiner.png"),
-		"scale":{"h":100,"w":100},
-		"toast":"enjineer moment",
-		"num":0
-	},
-	"mafs":{
-		"txt":"mafs",
-		"color":"#000000",
-		"gname":"",
-		"graph":false,
-		"img":newImage("assets/mafs.png"),
-		"scale":{"h":100, "w":100},
-		"toast":"mafs moment",
-		"num":0
-	},
-	"doge":{
-		"txt":"doge",
-		"color":"#000000",
-		"gname":"",
-		"graph":false,
-		"img":newImage("assets/doge.png"),
-		"scale":{"h":100, "w":100},
-		"toast":"bork",
-		"num":0
-	}
-}
-
+var emotionData ={}
 /* Chart.js configs */
 
-const data = {
+var data = {
   labels: listAttributes(emotionData, "gname", true),
   datasets: [{
     label: 'Emotions',
@@ -142,10 +63,10 @@ function resizeCanvas() {
     canv.height = leastwidth*0.45;
 }
 
-function listAttributes(obj, path, check) { //chekc => true / false (check for "graph")
+function listAttributes(obj, path, check) { //check => true / false (check for "graph")
   let output= []
   Object.keys(obj).forEach(function (item) {
-    if (obj[item]["graph"] || !check) {
+    if (obj[item]["graph"]==="1" || !check) {
       output.push(obj[item][path]);
     }
   })
@@ -170,9 +91,10 @@ function newImage(url){
     tmp.src = url;
     return tmp
 }
-function urlsToImages(obj) {
+function processJSON(obj) {
   Object.keys(obj).forEach(function (item) {
-    obj[item]["img"]=newImage(obj[item]["img"])
+    obj[item]["img"]=newImage(obj[item]["img"]);
+    obj[item]["color"]='#'+obj[item].color;
   })
   return obj;
 }
@@ -198,7 +120,7 @@ function renderJSON(jsonString) {
       if (times > 0) {//new item added
         for (let step=0; step < times; step++) {
           //if supposed to draw unicode
-          if (emotionData[respItem].img === undefined) {
+          if (emotionData[respItem].img === undefined || emotionData[respItem].img === "") {
             ctx.fillStyle = emotionData[respItem].color
             ctx.fillText(emotionData[respItem].txt, getRndInteger(15, c.width-30), getRndInteger(15, c.height-15)) //30 being the font size, we dont want the unicode intersecting with edge
           } else {
@@ -208,7 +130,7 @@ function renderJSON(jsonString) {
             ctx.drawImage(emotionData[respItem].img, tmpx, tmpy, emotionData[respItem].scale.w, emotionData[respItem].scale.h)
           }
           //if toast
-          if (!(emotionData[respItem].toast === undefined) && !(redrawAll)) {
+          if (!(emotionData[respItem].toast === undefined || emotionData[respItem].toast === "") && !(redrawAll)) {
             M.toast({html: emotionData[respItem].toast, displayLength: 750})
           }
           //dim all things on canvas by a little
@@ -231,7 +153,12 @@ function renderJSON(jsonString) {
   myChart.update()
 }
 function getConfig() {
-  fetch("https://message.cadetconcrete.co.uk/inc/maths/receive.php?config=1").then(x => x.text()).then(function (f) {let unformatted=JSON.parse(f);emotionData=urlsToImages(unformatted)}).catch(error => {console.error("get config failed: ", error)})
+  fetch("https://message.cadetconcrete.co.uk/inc/maths/receive.php?config=1").then(x => x.text()).then(function (f) {let unformatted=JSON.parse(f);emotionData=processJSON(unformatted);
+  data.labels=listAttributes(emotionData, 'gname', true)
+  data.datasets[0].data=listAttributes(emotionData, 'num', true)
+  data.datasets[0].backgroundColor=listAttributes(emotionData, 'color', true)
+  myChart.update()
+  }).catch(error => {console.error("get config failed: ", error)})
   setInterval(doUpdate, 100) //only set this after receiving remote config
 }
 getConfig();
