@@ -142,7 +142,7 @@ function resizeCanvas() {
     canv.height = leastwidth*0.45;
 }
 
-function listAttributes(obj, path, check) { //chekc => true / false (chekc for "graph")
+function listAttributes(obj, path, check) { //chekc => true / false (check for "graph")
   let output= []
   Object.keys(obj).forEach(function (item) {
     if (obj[item]["graph"] || !check) {
@@ -224,9 +224,11 @@ function renderJSON(jsonString) {
   data.datasets[0].data=listAttributes(emotionData, 'num', true)
   myChart.update()
 }
-
-setInterval(doUpdate, 100)
-
+function getConfig() {
+  fetch("https://message.cadetconcrete.co.uk/inc/maths/receive.php?config=1").then(x => x.text()).then(function (f) {console.log(f);emotionData=JSON.parse(f);console.log(emotionData)})
+  setInterval(doUpdate, 100) //only set this after receiving remote config
+}
+getConfig();
 </script>
 </body>
 </html>
