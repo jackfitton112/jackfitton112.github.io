@@ -2,7 +2,7 @@
 
 include "db.php";
 //set utf8mb4 thing in for //
-
+mysqli_set_charset($conn, 'utf8mb4');
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: *");
 header("Access-Control-Expose-Headers: *");
