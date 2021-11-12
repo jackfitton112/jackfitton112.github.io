@@ -165,10 +165,16 @@ function del(){
 function getRndInteger(min, max) {
   return Math.floor(Math.random() * (max - min) ) + min;
 }
-function newImage(src){
+function newImage(url){
     var tmp = new Image();
-    tmp.src = src;
+    tmp.src = url;
     return tmp
+}
+function urlsToImages(obj) {
+  Object.keys(obj).forEach(function (item) {
+    obj[item]["img"]=newImage(obj[item]["img"])
+  })
+  return obj;
 }
 /* MAIN */
 //TODO: rewrite ALL of the receive thing to work async
@@ -225,7 +231,7 @@ function renderJSON(jsonString) {
   myChart.update()
 }
 function getConfig() {
-  fetch("https://message.cadetconcrete.co.uk/inc/maths/receive.php?config=1").then(x => x.text()).then(function (f) {console.log(f);emotionData=JSON.parse(f);console.log(emotionData)})
+  fetch("https://message.cadetconcrete.co.uk/inc/maths/receive.php?config=1").then(x => x.text()).then(function (f) {let unformatted=JSON.parse(f);emotionData=urlsToImages(unformatted)}).catch(error => {console.error("get config failed: ", error)})
   setInterval(doUpdate, 100) //only set this after receiving remote config
 }
 getConfig();
