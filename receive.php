@@ -26,7 +26,7 @@ if ($config == 1){
           "toast" => $row['toast'],
           "num" => $row['emoji']
           );
-        echo json_encode($array);
+        echo json_encode($array,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
 
       }
 
@@ -53,7 +53,7 @@ elseif ($update == 1) {
 
         }
 
-          echo json_encode($array);
+          echo json_encode($array,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
 } else {
 
 
