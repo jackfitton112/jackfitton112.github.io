@@ -26,7 +26,8 @@ if ($config == 1){
           "img" => $row['img'],
           "scale" => ["w" => $row['scalew'], "h" => $row['scaleh']],
           "toast" => $row['toast'],
-          "num" => $row['emoji']
+          "num" => "0",
+          "graph" => $row['graph']
         );}
         echo json_encode($array,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
 

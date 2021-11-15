@@ -1,4 +1,3 @@
-
 <html>
 
 <head>
@@ -31,41 +30,16 @@ if (OStype.slice(0, 3)=="Mac") {
   window.location.assign("https://heeeeeeeey.com/")
 }
 /* CONFIG STUFFS */
-// index of returned array : [fallback unicode/text, chart colour, image if set, image scaling [x, y], toast comment]
-var dict = [
-  ["\u{1F60A}", "#00ff00"], //\u{1F60A}", //happy
-  ["\u{1F622}", "#0000ff"],//\u{1F622}", //sad
-  ["\u{1F633}", "#646464", newImage("assets/depressedWojakTransparency.gif"), [40, 40]],//\u{1F633}", //depressed
-  ["\u{1F610}", "#ff0000"],//\u{1F610}" //confused
-  ["preach", "#FF00E1",newImage("assets/preach.png"),[50,40],"Preach!"],// preach meme
-  ["\u{1F496}", "#ffffff"],
-  ["enjineer", "#000000", newImage("assets/enjiner.png"), [100, 100], "enjineer moment"], //enjineer meme
-  ["mafs", "#000000", newImage("assets/mafs.png"), [100, 100], "mafs moment"],//mafs meme
-  ["Doge", "#000000", newImage("assets/doge.png"), [100, 100]]//doge meme
-]
-
-var diffElements=dict.length
-var prev = Array(diffElements).fill(0);
-
+// data layout: {"id":{"txt":"unicode fallback", "color":"#aabbcc", "graph:true", "gname":"Happy", "amount":0}, etc}
+var emotionData ={}
 /* Chart.js configs */
-const data = {
-  labels: [
-  'Happy',
-  'Sad',
-  'Depressed',
-  'Confused',
-  'Preach'
-  ],
+
+var data = {
+  labels: listAttributes(emotionData, "gname", true),
   datasets: [{
     label: 'Emotions',
-    data: [0, 0, 0, 0, 0],
-    backgroundColor: [
-      dict["0"][1],
-      dict["1"][1],
-	  dict["2"][1],
-      dict["3"][1],
-	  dict["4"][1]
-    ],
+    data: listAttributes(emotionData, "num", true),
+    backgroundColor: listAttributes(emotionData, "color", true),
     hoverOffset: 4
   }]
 };
@@ -74,9 +48,7 @@ const config = {
   type: 'doughnut',
   data: data,
   options :{
-
   }
-
 };
 
 const myChart = new Chart( //render chart
@@ -94,91 +66,112 @@ function resizeCanvas() {
     canv.width = leastwidth*0.45;
     canv.height = leastwidth*0.45;
 }
+
+function listAttributes(obj, path, check) { //check => true / false (check for "graph")
+  let output= []
+  Object.keys(obj).forEach(function (item) {
+    if (obj[item]["graph"]==="1" || !check) {
+      output.push(obj[item][path]);
+    }
+  })
+  return output;
+}
 function del(){
-  prev=[0, 0, 0, 0, 0]
+  Object.keys(emotionData).forEach(function (item) {emotionData[item]["num"]=0}) // set all num to 0
   fetch("https://message.cadetconcrete.co.uk/inc/maths/send.php?id=delete")
   var c = document.getElementById("myCanvas");
   var ctx = c.getContext('2d');
   var canv = document.getElementById("myCanvas");
   ctx.clearRect(0, 0, canv.width, canv.height);
-  data.datasets[0].data=[0, 0, 0, 0, 0]
+  data.datasets[0].data=listAttributes(emotionData, "num", true)
   myChart.update()
 }
 /* HELPERS */
+function isEmpty(objProperty) {
+  if (objProperty === undefined || objProperty == "" || objProperty == false) {
+    return true
+  }
+  return false
+}
 function getRndInteger(min, max) {
   return Math.floor(Math.random() * (max - min) ) + min;
 }
-function newImage(src){
+function newImage(url){
     var tmp = new Image();
-    tmp.src = src;
+    tmp.src = url;
     return tmp
 }
+function processJSON(obj) {
+  Object.keys(obj).forEach(function (item) {
+    obj[item]["img"]=newImage(obj[item]["img"]);
+    obj[item]["color"]='#'+obj[item].color;
+  })
+  return obj;
+}
 /* MAIN */
-(function() {//"main loop"
-  var httpRequest;
-
-
-  function makeRequest() {
-    httpRequest = new XMLHttpRequest();
-
-    if (!httpRequest) {
-      alert('Giving up :( Cannot create an XMLHTTP instance');
-      return false;
-    }
-    var time = new Date();
-    httpRequest.onreadystatechange = alertContents;
-    httpRequest.open('GET', 'https://message.cadetconcrete.co.uk/inc/maths/receive.php?time=' + time, true);
-    httpRequest.send();
-  }
-
-  function alertContents() {
-    if (httpRequest.readyState === XMLHttpRequest.DONE) {
-      if (httpRequest.status === 200) {
-        var c = document.getElementById("myCanvas");
-        var ctx = c.getContext('2d');
-        ctx.font = "30px Arial";
-		ctx.textAlign="center";
-        var x = JSON.parse(httpRequest.response);
-		x.forEach(function draw (value, index) {
-			var times = value-prev[index]
-			if (times > 0) { // if new item got added
-				prev[index]=value
-				for (let step = 0; step < times; step++) {
-					ctx.fillStyle = dict[index][1]
-					if (dict[index].length>2) {
-						let tmpx=getRndInteger(0, c.width-dict[index][3][0])
-						let tmpy=getRndInteger(0, c.height-dict[index][3][1])
-						ctx.drawImage(dict[index][2], tmpx, tmpy, dict[index][3][0], dict[index][3][1])
-						if (dict[index].length>4) {
-						M.toast({html: dict[index][4], displayLength: 750})
-						}
-					} else {
-  						ctx.fillText(dict[index][0], getRndInteger(15, c.width-30), getRndInteger(15, c.height-15)) //30 being the font size, we dont want the unicode intersecting with edge
-					}
-					ctx.globalCompositeOperation='source-atop';
+//TODO: rewrite ALL of the receive thing to work async
+function doUpdate() {
+  let time = Date.now()
+  fetch("https://message.cadetconcrete.co.uk/inc/maths/receive.php?update=1&time="+time).then(x => x.text()).then(renderJSON).catch(error => {console.error("rip: ", error)})
+}
+var redrawAll = 0
+function renderJSON(jsonString) {
+  //setup canvas
+  var c = document.getElementById("myCanvas");
+  var ctx = c.getContext('2d');
+  ctx.font = "30px Arial";
+  ctx.textAlign="center";
+  let response = JSON.parse(jsonString)
+  if (redrawAll==1) {ctx.fillStyle = '#ffffff';ctx.fillRect(0, 0, c.width, c.height)} //clear canvas for redrawing. do this here instead of at if times < 0 to stop canvas being empty until next fetch
+  Object.keys(response).forEach(function (respItem) {
+    if (emotionData[respItem]) {//check if item exists in emotionData
+      let times = response[respItem].num - emotionData[respItem].num
+      if (redrawAll==1) {times=response[respItem].num}
+      if (times > 0) {//new item added
+        for (let step=0; step < times; step++) {
+          //if supposed to draw unicode
+          if !(isEmpty(emotionData["txt"])) {
+            ctx.fillStyle = emotionData[respItem].color
+            ctx.fillText(emotionData[respItem].txt, getRndInteger(15, c.width-30), getRndInteger(15, c.height-15)) //30 being the font size, we dont want the unicode intersecting with edge
+          } else {
+          //if supposed to do Image
+            let tmpx=getRndInteger(0, c.width-emotionData[respItem].scale.w)
+            let tmpy=getRndInteger(0, c.height-emotionData[respItem].scale.h)
+            ctx.drawImage(emotionData[respItem].img, tmpx, tmpy, emotionData[respItem].scale.w, emotionData[respItem].scale.h)
+          }
+          //if toast
+          if (!(isEmpty(emotionData[respItem]["toast"])) && !(redrawAll)) {
+            M.toast({html: emotionData[respItem].toast, displayLength: 750})
+          }
+          //dim all things on canvas by a little
+          ctx.globalCompositeOperation='source-atop';
 					ctx.fillStyle = 'rgba(254,255,255,0.1)';
 					ctx.fillRect(0, 0, c.width, c.height);
 					ctx.globalCompositeOperation='source-over';
-				}
-
-			}
-			if (times < 0) {//if item got cleared
-				ctx.fillStyle = '#ffffff';
-				ctx.fillRect(0, 0, c.width, c.height)
-				prev=Array(diffElements).fill(0);
-			}
-		})
-		data.datasets[0].data=prev.slice(0, 5)
-		myChart.update()
-      } else {
-        console.log(httpRequest.status);
+        }
       }
+
+      if (times < 0) {//item got removed
+        redrawAll=2 //schedule rerender of entire canvas; 2=(just set) 1=(got out of loop) 0=(gone through entire render again)
+      }
+      emotionData[respItem].num=response[respItem].num //done updating, set emotionData.num to newest
     }
-  }
-
-  var t=setInterval(makeRequest,100);
-})();
-
+  })
+  //add to chart data and update chart
+  if (redrawAll>0){redrawAll-=1}//decrease redraw if bigger than 0, switches to next state (see item got removed bit)
+  data.datasets[0].data=listAttributes(emotionData, 'num', true)
+  myChart.update()
+}
+function getConfig() {
+  fetch("https://message.cadetconcrete.co.uk/inc/maths/receive.php?config=1").then(x => x.text()).then(function (f) {let unformatted=JSON.parse(f);emotionData=processJSON(unformatted);
+  data.labels=listAttributes(emotionData, 'gname', true)
+  data.datasets[0].data=listAttributes(emotionData, 'num', true)
+  data.datasets[0].backgroundColor=listAttributes(emotionData, 'color', true)
+  myChart.update()
+  }).catch(error => {console.error("get config failed: ", error)})
+  setInterval(doUpdate, 100) //only set this after receiving remote config
+}
+getConfig();
 </script>
 </body>
 </html>
