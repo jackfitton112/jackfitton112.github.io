@@ -12,7 +12,7 @@
 
 <body style="background: rgb(38,37,37);">
     <h1 class="text-center" style="color: rgb(255,255,255);">Maths React</h1>
-
+<!--
     <div class="d-inline-flex" style="width: 45vw;margin: -2px;margin-left: 2vw;margin-right: 2vw;">
       <button onclick="buttonEvent('h')" class="btn btn-primary text-center" type="button" style="width: 100%;height: 20vh;font-weight: bold;font-size: 25px;color: rgb(255, 255, 255);background: linear-gradient(159deg, rgb(20,255,0) 0%, rgb(3,255,127) 61%, rgb(116,182,126));">Happy
       </button>
@@ -42,7 +42,7 @@
       <button onclick="buttonEvent('l')" class="btn btn-primary text-cent er" type="button" style="width: 100%;height: 20vh;font-weight: bold;font-size: 25px;background:red;">&#10084;
       </button>
     </div>
-
+-->
     <p  id="rainbow" style="width:100%; position:fixed; bottom:3px; text-align:center;" class="p1 d-block">Designed by JF &amp; DP 2021</p>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
@@ -162,6 +162,37 @@ function formatDate(date, format, utc) {
 
     return format;
 };
+function createButton(btnData) {
+  console.log(btnData)
+
+  let formGroup = document.createElement("div");
+  formGroup.setAttribute('id', btnData["id"]) //ideally id, make receive.php send this too
+  formGroup.setAttribute('style', 'width: 45vw;margin: -2px;margin-left: 2vw;margin-right: 2vw;');
+  formGroup.className += " d-inline-flex";
+  document.body.appendChild(formGroup);
+
+  let btn = document.createElement("button");
+  btn.innerHTML = btnData["gname"];
+  btn.setAttribute('style', 'width: 100%;height: 20vh;font-weight: bold;font-size: 25px; background: #'+btnData["color"])
+  btn.setAttribute('onclick', 'buttonEvent("'+btnData["id"]+'")')
+  btn.className += "btn btn-primary text-cent er";
+  document.getElementById(btnData["id"]).appendChild(btn);
+}
+function getConfig() {
+  fetch("https://message.cadetconcrete.co.uk/inc/maths/receive.php?config=1")
+  .then(x => x.text())
+  .then(function (f) {
+    let btnConfig=JSON.parse(f);
+    return btnConfig
+  })
+  .then(g => {
+    Object.keys(g).forEach(function (btn) {
+      createButton(g[btn])
+    })
+  })
+  .catch(error => {console.error("get config failed: ", error)})
+}
+getConfig();
 </script>
 
 </html>

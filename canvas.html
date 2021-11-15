@@ -130,7 +130,7 @@ function renderJSON(jsonString) {
       if (times > 0) {//new item added
         for (let step=0; step < times; step++) {
           //if supposed to draw unicode
-          if !(isEmpty(emotionData["txt"])) {
+          if (!(isEmpty(emotionData["txt"]))) {
             ctx.fillStyle = emotionData[respItem].color
             ctx.fillText(emotionData[respItem].txt, getRndInteger(15, c.width-30), getRndInteger(15, c.height-15)) //30 being the font size, we dont want the unicode intersecting with edge
           } else {

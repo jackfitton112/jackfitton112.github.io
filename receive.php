@@ -27,7 +27,8 @@ if ($config == 1){
           "scale" => ["w" => $row['scalew'], "h" => $row['scaleh']],
           "toast" => $row['toast'],
           "num" => "0",
-          "graph" => $row['graph']
+          "graph" => $row['graph'],
+          "id" => $row['name']
         );}
         echo json_encode($array,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
 
