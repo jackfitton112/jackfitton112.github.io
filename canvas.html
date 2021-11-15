@@ -83,6 +83,12 @@ function del(){
   myChart.update()
 }
 /* HELPERS */
+function isEmpty(objProperty) {
+  if (objProperty === undefined || objProperty == "" || objProperty == false) {
+    return true
+  }
+  return false
+}
 function getRndInteger(min, max) {
   return Math.floor(Math.random() * (max - min) ) + min;
 }
@@ -120,7 +126,7 @@ function renderJSON(jsonString) {
       if (times > 0) {//new item added
         for (let step=0; step < times; step++) {
           //if supposed to draw unicode
-          if (emotionData[respItem].img === undefined || emotionData[respItem].img === "") {
+          if !(isEmpty(emotionData["txt"])) {
             ctx.fillStyle = emotionData[respItem].color
             ctx.fillText(emotionData[respItem].txt, getRndInteger(15, c.width-30), getRndInteger(15, c.height-15)) //30 being the font size, we dont want the unicode intersecting with edge
           } else {
@@ -130,7 +136,7 @@ function renderJSON(jsonString) {
             ctx.drawImage(emotionData[respItem].img, tmpx, tmpy, emotionData[respItem].scale.w, emotionData[respItem].scale.h)
           }
           //if toast
-          if (!(emotionData[respItem].toast === undefined || emotionData[respItem].toast === "") && !(redrawAll)) {
+          if (!(isEmpty(emotionData[respItem]["toast"])) && !(redrawAll)) {
             M.toast({html: emotionData[respItem].toast, displayLength: 750})
           }
           //dim all things on canvas by a little
