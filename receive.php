@@ -28,7 +28,8 @@ if ($config == 1){
           "toast" => $row['toast'],
           "num" => "0",
           "graph" => $row['graph'],
-          "id" => $row['name']
+          "id" => $row['name'],
+          "visible" => $row['visible']
         );}
         echo json_encode($array,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
 
